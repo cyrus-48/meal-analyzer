@@ -1,0 +1,53 @@
+services:
+  - type: web
+    name: foodai-web
+    env: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: |
+      python manage.py collectstatic --noinput
+      python manage.py migrate
+      gunicorn config.wsgi:application
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.12.0
+      - key: WEB_CONCURRENCY
+        value: 4
+      - key: DJANGO_SETTINGS_MODULE
+        value: config.settings
+      - key: CELERY_BROKER_URL
+        value: redis://default:pHsAMoPszFjlZuVGjIGxBoltKtmKxvbf@yamabiko.proxy.rlwy.net:21680
+      - key: CELERY_RESULT_BACKEND
+        value: redis://default:pHsAMoPszFjlZuVGjIGxBoltKtmKxvbf@yamabiko.proxy.rlwy.net:21680
+      - key: SECRET_KEY
+        generateValue: true
+      - key: USE_SQLITE
+        value: true
+    disk:
+      name: sqlite
+      mountPath: /opt/render/project/src/db
+      sizeGB: 1
+    autoDeploy: true
+    healthCheckPath: /health/
+
+  - type: worker
+    name: foodai-worker
+    env: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: celery -A config worker -B -l INFO
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.12.0
+      - key: DJANGO_SETTINGS_MODULE
+        value: config.settings
+      - key: CELERY_BROKER_URL
+        value: redis://default:pHsAMoPszFjlZuVGjIGxBoltKtmKxvbf@yamabiko.proxy.rlwy.net:21680
+      - key: CELERY_RESULT_BACKEND
+        value: redis://default:pHsAMoPszFjlZuVGjIGxBoltKtmKxvbf@yamabiko.proxy.rlwy.net:21680
+      - key: SECRET_KEY
+        sync: true
+      - key: USE_SQLITE
+        value: true
+    disk:
+      name: sqlite
+      mountPath: /opt/render/project/src/db
+      sizeGB: 1
