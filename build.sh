@@ -47,29 +47,5 @@ python manage.py migrate || {
     exit 1
 }
 
-# Start Gunicorn with your current configuration
-print_status "🌟 Starting Gunicorn server..."
-gunicorn config.wsgi:application \
-    --workers=2 \
-    --threads=2 \
-    --bind=0.0.0.0:$PORT \
-    --log-level=info \
-    --access-logfile=- \
-    --error-logfile=- \
-    --capture-output \
-    --enable-stdio-inheritance &
-
-# Start Celery worker
-print_status "🌾 Starting Celery worker..."
-celery -A config worker \
-    --concurrency=1 \
-    -B \
-    -l INFO \
-    --without-heartbeat \
-    --without-gossip \
-    --without-mingle &
-
-# Wait for all processes
-wait
-
-print_status "✅ Build process completed!"
+print_status "✅ Build process completed successfully!"
+exit 0
