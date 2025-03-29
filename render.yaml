@@ -44,7 +44,10 @@ services:
       - key: CELERY_RESULT_BACKEND
         value: redis://default:pHsAMoPszFjlZuVGjIGxBoltKtmKxvbf@yamabiko.proxy.rlwy.net:21680
       - key: SECRET_KEY
-        sync: true
+        fromService:
+          type: web
+          name: foodai-web
+          envVarKey: SECRET_KEY
       - key: USE_SQLITE
         value: true
     disk:
