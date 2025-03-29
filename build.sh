@@ -47,5 +47,14 @@ python manage.py migrate || {
     exit 1
 }
 
+# Create activation script for start command
+print_status "📝 Creating start script..."
+cat > start.sh << 'EOF'
+#!/bin/bash
+source venv/bin/activate
+exec gunicorn config.wsgi:application --bind 0.0.0.0:$PORT --workers 2 --threads 2
+EOF
+chmod +x start.sh
+
 print_status "✅ Build process completed successfully!"
 exit 0
