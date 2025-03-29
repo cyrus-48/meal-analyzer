@@ -15,20 +15,6 @@ print_error() {
     echo -e "${RED}[$(date +'%Y-%m-%d %H:%M:%S')] ERROR: $1${NC}"
 }
 
-# Check if .env file exists
-if [ ! -f .env ]; then
-    print_error ".env file not found!"
-    exit 1
-fi
-
-# Load environment variables
-set -a
-source .env
-set +a
-
-# Set default port if not specified
-export PORT=${PORT:-10000}
-
 print_status "🚀 Starting FoodAI build process..."
 
 # Setup virtual environment
@@ -73,7 +59,7 @@ gunicorn config.wsgi:application \
     --capture-output \
     --enable-stdio-inheritance &
 
-# Start Celery worker with your current configuration
+# Start Celery worker
 print_status "🌾 Starting Celery worker..."
 celery -A config worker \
     --concurrency=1 \
@@ -83,24 +69,7 @@ celery -A config worker \
     --without-gossip \
     --without-mingle &
 
-# Store PIDs for cleanup
-echo $! > celery.pid
-echo $! > gunicorn.pid
-
-# Trap SIGTERM and SIGINT
-cleanup() {
-    print_status "📥 Shutting down services..."
-    kill $(cat celery.pid)
-    kill $(cat gunicorn.pid)
-    rm -f celery.pid gunicorn.pid
-    deactivate
-    print_status "✅ Cleanup completed"
-    exit 0
-}
-
-trap cleanup SIGTERM SIGINT
-
-# Wait for all background processes
+# Wait for all processes
 wait
 
 print_status "✅ Build process completed!"
