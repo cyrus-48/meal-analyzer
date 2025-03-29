@@ -120,11 +120,12 @@ class AnalysisCreateView(LoginRequiredMixin, CreateView):
             # Queue the analysis task
             analyze_food_image.delay(self.object.id)
             
+            
+            
             # Show success message
             messages.success(
                 self.request, 
-                "Your food image has been uploaded and is being analyzed. "
-                "Please check back in a few moments."
+                "Your food image has been uploaded and is being analyzed. " 
             )
             
             return HttpResponseRedirect(self.get_success_url())

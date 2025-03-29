@@ -16,15 +16,24 @@
                         dark: '#1F2937',
                     },
                     fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
+                        sans: ['Poppins', 'sans-serif'],
+                    },
+                    container: {
+                        center: true,
+                        padding: '2rem',
+                        screens: {
+                            sm: '600px',
+                            md: '728px',
+                            lg: '984px',
+                            xl: '1240px',
+                            '2xl': '1496px',
+                        },
                     },
                 }
             }
         }
-        
-
-        
     </script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         @keyframes progress {
         0% { transform: translateX(-100%); }
@@ -43,22 +52,38 @@
         animation: bounce 1s infinite;
     }
     
-    /* Add any other custom styles needed */
+    .glass-effect {
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+    }
+    
+    h1, h2, h3, h4, h5, h6 {
+        font-family: 'Poppins', sans-serif;
+        letter-spacing: -0.025em;
+    }
+    
+    html {
+        scroll-behavior: smooth;
+    }
+    
+    .transition-all {
+        transition-duration: 300ms;
+    }
+    
+    .container-fluid {
+        width: 95%;
+        margin-left: auto;
+        margin-right: auto;
+        max-width: 2000px;
+    }
     </style>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <style>
-        .glass-effect {
-            background: rgba(255, 255, 255, 0.9);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-        }
-    </style>
 </head>
-<body class="bg-gradient-to-br from-gray-50 to-gray-100 min-h-screen flex flex-col">
+<body class="bg-gradient-to-br from-gray-50 to-gray-100 min-h-screen flex flex-col font-sans">
     <!-- Navigation -->
     <nav class="glass-effect sticky top-0 z-50 border-b border-gray-200">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="container-fluid py-4">
             <div class="flex items-center justify-between h-16">
                 <div class="flex items-center">
                     <a href="{% url 'home' %}" class="flex items-center space-x-2">
@@ -124,7 +149,7 @@
 
     <!-- Messages -->
     {% if messages %}
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-4">
+        <div class="container-fluid my-4">
             {% for message in messages %}
                 <div x-data="{ show: true }" x-show="show" x-transition class="p-4 rounded-lg shadow-lg {% if message.tags == 'success' %}bg-green-50 border border-green-200 text-green-700{% elif message.tags == 'error' %}bg-red-50 border border-red-200 text-red-700{% else %}bg-blue-50 border border-blue-200 text-blue-700{% endif %} flex justify-between items-center">
                     <div class="flex items-center">
@@ -140,13 +165,15 @@
     {% endif %}
 
     <!-- Main Content -->
-    <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        {% block content %}{% endblock %}
+    <main class="flex-grow w-full">
+        <div class="container-fluid py-8">
+            {% block content %}{% endblock %}
+        </div>
     </main>
 
     <!-- Footer -->
     <footer class="glass-effect border-t border-gray-200 mt-auto">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div class="container-fluid py-12">
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <div>
                     <div class="flex items-center space-x-2">

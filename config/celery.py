@@ -15,3 +15,11 @@ app.autodiscover_tasks([
 @app.task(bind=True, ignore_result=True)
 def debug_task(self):
     print(f'Request: {self.request!r}')
+    
+    
+app.conf.beat_schedule = {
+    'process-pending-analyses': {
+        'task': 'analyzer.tasks.process_pending_analyses',
+        'schedule': 300000.0,
+    },
+}
