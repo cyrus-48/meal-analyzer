@@ -171,10 +171,11 @@
                     </div>
                     <div class="space-y-2">
                         <h3 class="text-lg font-bold text-gray-900" id="loading-text">
-                            Analyzing your food...
+                            UPLOADING IMAGE...
                         </h3>
                         <p class="text-sm text-gray-600">
-                            Our AI is identifying ingredients and calculating nutritional information
+                            Wait a moment while we send your image for analysis.
+                             
                         </p>
                     </div>
                     <div class="relative w-full h-2 bg-gray-100 rounded-full overflow-hidden">
@@ -367,7 +368,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         if (newStatus && newStatus.dataset.analysisStatus !== 'pending') {
                             window.location.reload();
                         } else {
-                            setTimeout(checkStatus, 5000); // Check again in 5 seconds
+                            setTimeout(checkStatus, 5000);  
                         }
                     });
             }, 5000);

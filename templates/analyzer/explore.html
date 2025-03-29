@@ -3,7 +3,7 @@
 {% block title %}Explore Food Analyses{% endblock %}
 
 {% block content %}
-<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="mx-auto px-4 sm:px-6 lg:px-8">
     <!-- Page Header -->
     <div class="mb-8">
         <h1 class="text-3xl font-bold text-gray-900">Explore <span class="bg-gradient-to-r from-primary to-secondary text-transparent bg-clip-text">Food Analyses</span></h1>
@@ -56,7 +56,7 @@
 
     <!-- Results Grid -->
     {% if analyses %}
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6">
             {% for analysis in analyses %}
                  
                {% include 'components/food.html' with analysis=analysis %}
