@@ -1,0 +1,5 @@
+<a href="{% url url %}" 
+   class="px-3 py-2 rounded-lg hover:bg-gray-50 transition-all duration-200 
+          {% if request.resolver_match.url_name == url %}text-primary font-medium{% else %}text-gray-700{% endif %}">
+    <i class="{{ icon }} mr-2"></i>{{ text|title }}
+</a>

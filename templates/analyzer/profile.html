@@ -1,0 +1,188 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ profile.user.username }}'s Profile{% endblock %}
+
+{% block content %}
+<div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+    <!-- Profile Header -->
+    <div class="bg-gradient-to-br from-white to-gray-50 rounded-2xl shadow-xl p-8 mb-8 border border-gray-100">
+        <div class="flex flex-col md:flex-row items-center md:items-start space-y-6 md:space-y-0 md:space-x-8">
+            <!-- Avatar with Ring Animation -->
+            <div class="flex-shrink-0 relative group">
+                <div class="absolute inset-0 bg-gradient-to-r from-primary to-secondary rounded-full blur-lg opacity-20 group-hover:opacity-30 transition-opacity"></div>
+                {% if profile.avatar %}
+                    <img src="{{ profile.avatar.url }}" 
+                         alt="{{ profile.user.username }}" 
+                         class="relative w-32 h-32 rounded-full object-cover ring-4 ring-white">
+                {% else %}
+                    <div class="relative w-32 h-32 rounded-full bg-gradient-to-br from-primary to-secondary text-white flex items-center justify-center">
+                        <span class="text-4xl font-bold">{{ profile.user.username|make_list|first|upper }}</span>
+                    </div>
+                {% endif %}
+            </div>
+
+            <!-- Profile Info -->
+            <div class="flex-grow text-center md:text-left">
+                <h1 class="text-4xl font-bold text-gray-900 mb-2">
+                    {{ profile.user.username }}
+                    {% if user == profile.user %}
+                        <span class="inline-block ml-2 text-sm px-3 py-1 rounded-full bg-primary/10 text-primary">
+                            That's you!
+                        </span>
+                    {% endif %}
+                </h1>
+                {% if profile.bio %}
+                    <p class="text-gray-600 text-lg mb-6">{{ profile.bio }}</p>
+                {% endif %}
+                <div class="flex flex-wrap justify-center md:justify-start gap-6 text-sm text-gray-600">
+                    {% if profile.location %}
+                        <div class="flex items-center space-x-2 bg-gray-50 px-4 py-2 rounded-xl">
+                            <i class="fas fa-map-marker-alt text-primary"></i>
+                            <span>{{ profile.location }}</span>
+                        </div>
+                    {% endif %}
+                    <div class="flex items-center space-x-2 bg-gray-50 px-4 py-2 rounded-xl">
+                        <i class="fas fa-calendar text-primary"></i>
+                        <span>Joined {{ profile.created_at|date:"F Y" }}</span>
+                    </div>
+                    <div class="flex items-center space-x-2 bg-gray-50 px-4 py-2 rounded-xl">
+                        <i class="fas fa-chart-bar text-primary"></i>
+                        <span>{{ analyses.count }} Analyses</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Action Buttons -->
+            {% if user == profile.user %}
+                <div class="flex-shrink-0">
+                    <a href="{% url 'profile-update' user.username %}" 
+                       class="group relative inline-flex items-center space-x-2 bg-gradient-to-r from-primary to-secondary 
+                              text-white px-6 py-3 rounded-xl hover:opacity-90 transition-all duration-200 
+                              shadow-lg shadow-primary/20">
+                        <span class="absolute inset-0 bg-white/20 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity"></span>
+                        <i class="fas fa-user-edit"></i>
+                        <span>Edit Profile</span>
+                    </a>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- Food Recommendations Section -->
+    <div class="bg-white rounded-2xl shadow-xl p-6 border border-gray-100 mb-8">
+        <div class="flex justify-between items-center mb-8">
+            <div>
+                <h2 class="text-2xl font-bold text-gray-900">Food Recommendations</h2>
+                <p class="text-gray-600 mt-1">Personalized meal suggestions</p>
+            </div>
+            <a href="{% url 'recommend' %}" 
+               class="inline-flex items-center space-x-2 bg-gradient-to-r from-primary to-secondary 
+                      text-white px-6 py-3 rounded-xl hover:opacity-90 transition-all duration-200 
+                      shadow-lg shadow-primary/20">
+                <i class="fas fa-magic"></i>
+                <span>Get Recommendations</span>
+            </a>
+        </div>
+
+        {% if recommendations %}
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {% for recommendation in recommendations %}
+                    <div class="bg-gray-50 rounded-xl p-6 group hover:bg-gradient-to-br hover:from-primary/5 hover:to-transparent transition-all duration-300">
+                        <div class="flex items-center space-x-3 mb-4">
+                            <span class="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center text-primary">
+                                <i class="fas fa-utensils"></i>
+                            </span>
+                            <div>
+                                <h3 class="font-semibold text-gray-900">{{ recommendation.get_meal_type_display }}</h3>
+                                <p class="text-sm text-gray-500">{{ recommendation.created_at|timesince }} ago</p>
+                            </div>
+                        </div>
+                        <div class="space-y-2 mb-4">
+                            <div class="flex items-center text-sm text-gray-600">
+                                <i class="fas fa-users w-5 text-primary"></i>
+                                <span>{{ recommendation.family_size }} people</span>
+                            </div>
+                            <div class="flex items-center text-sm text-gray-600">
+                                <i class="fas fa-globe-africa w-5 text-primary"></i>
+                                <span>{{ recommendation.region }}</span>
+                            </div>
+                        </div>
+                        <a href="{% url 'recommendation-detail' recommendation.id %}" 
+                           class="inline-flex items-center text-sm text-primary hover:text-secondary transition-colors">
+                            View Details
+                            <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <div class="text-center py-16">
+                <div class="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-6">
+                    <i class="fas fa-magic text-3xl text-primary"></i>
+                </div>
+                <h3 class="text-2xl font-bold text-gray-900 mb-2">No recommendations yet</h3>
+                <p class="text-gray-600 mb-8">
+                    Get personalized meal suggestions based on your preferences
+                </p>
+                <a href="{% url 'recommend' %}" 
+                   class="inline-flex items-center space-x-2 bg-gradient-to-r from-primary to-secondary 
+                          text-white px-8 py-4 rounded-xl hover:opacity-90 transition-all duration-200 
+                          shadow-lg shadow-primary/20">
+                    <i class="fas fa-magic"></i>
+                    <span>Get Your First Recommendation</span>
+                </a>
+            </div>
+        {% endif %}
+    </div>
+
+    <!-- Analyses Section -->
+    <div class="bg-white rounded-2xl shadow-xl p-6 border border-gray-100">
+        <div class="flex justify-between items-center mb-8">
+            <div>
+                <h2 class="text-2xl font-bold text-gray-900">Food Analyses</h2>
+                <p class="text-gray-600 mt-1">Discover {{ profile.user.username }}'s food journey</p>
+            </div>
+            {% if user == profile.user %}
+                <a href="{% url 'analysis-create' %}" 
+                   class="inline-flex items-center space-x-2 bg-gradient-to-r from-primary to-secondary 
+                          text-white px-6 py-3 rounded-xl hover:opacity-90 transition-all duration-200 
+                          shadow-lg shadow-primary/20">
+                    <i class="fas fa-plus"></i>
+                    <span>New Analysis</span>
+                </a>
+            {% endif %}
+        </div>
+
+        {% if analyses %}
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {% for analysis in analyses %}
+                    {% include 'components/food.html' with analysis=analysis %}
+                {% endfor %}
+            </div>
+        {% else %}
+            <div class="text-center py-16">
+                <div class="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-6">
+                    <i class="fas fa-utensils text-3xl text-primary"></i>
+                </div>
+                <h3 class="text-2xl font-bold text-gray-900 mb-2">No analyses yet</h3>
+                <p class="text-gray-600 mb-8">
+                    {% if user == profile.user %}
+                        Start your food analysis journey today!
+                    {% else %}
+                        {{ profile.user.username }} hasn't analyzed any food yet.
+                    {% endif %}
+                </p>
+                {% if user == profile.user %}
+                    <a href="{% url 'analysis-create' %}" 
+                       class="inline-flex items-center space-x-2 bg-gradient-to-r from-primary to-secondary 
+                              text-white px-8 py-4 rounded-xl hover:opacity-90 transition-all duration-200 
+                              shadow-lg shadow-primary/20">
+                        <i class="fas fa-plus"></i>
+                        <span>Analyze Your First Food</span>
+                    </a>
+                {% endif %}
+            </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,170 @@
+{% extends 'base.html' %}
+
+{% block title %}Edit Profile{% endblock %}
+
+{% block content %}
+<div class="max-w-2xl mx-auto px-4 py-8">
+    <div class="bg-white rounded-2xl shadow-xl p-8 border border-gray-100">
+        <!-- Enhanced Header -->
+        <div class="flex items-center justify-between mb-8">
+            <div class="space-y-1">
+                <h1 class="text-2xl font-bold bg-gradient-to-r from-primary to-secondary text-transparent bg-clip-text">
+                    Edit Profile
+                </h1>
+                <p class="text-gray-600">Customize your profile information</p>
+            </div>
+            <a href="{% url 'profile' user.username %}" 
+               class="inline-flex items-center px-4 py-2 rounded-xl bg-primary/5 text-primary hover:bg-primary/10 transition-colors">
+                <i class="fas fa-arrow-left mr-2"></i>Back to Profile
+            </a>
+        </div>
+
+        <form method="post" enctype="multipart/form-data" class="space-y-8" id="profileForm">
+            {% csrf_token %}
+
+            <!-- Enhanced Avatar Section -->
+            <div class="relative group">
+                <div class="flex items-center space-x-6 p-6 bg-gray-50 rounded-2xl">
+                    <div class="relative">
+                        {% if user.profile.avatar %}
+                            <img src="{{ user.profile.avatar.url }}" 
+                                 alt="Current avatar" 
+                                 class="w-28 h-28 rounded-2xl object-cover ring-4 ring-primary/20"
+                                 id="avatarPreview">
+                        {% else %}
+                            <div class="w-28 h-28 rounded-2xl bg-gradient-to-br from-primary/5 to-primary/10 flex items-center justify-center ring-4 ring-primary/20"
+                                 id="avatarPlaceholder">
+                                <i class="fas fa-user text-4xl text-primary/40"></i>
+                            </div>
+                        {% endif %}
+                        <div class="absolute inset-0 bg-black/50 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                            <span class="text-white text-sm">Change Photo</span>
+                        </div>
+                    </div>
+                    <div class="flex-grow space-y-2">
+                        <label for="{{ form.avatar.id_for_label }}" 
+                               class="block text-sm font-medium text-gray-700">
+                            Profile Picture
+                        </label>
+                        {{ form.avatar }}
+                        {% if form.avatar.errors %}
+                            <div class="text-red-600 text-sm">{{ form.avatar.errors }}</div>
+                        {% endif %}
+                        <p class="text-sm text-gray-500">
+                            <i class="fas fa-info-circle mr-1"></i>
+                            Recommended: Square image, at least 400x400px
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Enhanced Bio Section -->
+            <div class="space-y-2">
+                <label for="{{ form.bio.id_for_label }}" 
+                       class="flex items-center text-sm font-medium text-gray-700">
+                    <i class="fas fa-book-open text-primary mr-2"></i>
+                    About Me
+                </label>
+                {{ form.bio }}
+                <div class="flex justify-between">
+                    {% if form.bio.errors %}
+                        <div class="text-red-600 text-sm">{{ form.bio.errors }}</div>
+                    {% endif %}
+                    <span class="text-sm text-gray-500" id="bioCounter">0/500 characters</span>
+                </div>
+            </div>
+
+            <!-- Enhanced Location Section -->
+            <div class="space-y-2">
+                <label for="{{ form.location.id_for_label }}" 
+                       class="flex items-center text-sm font-medium text-gray-700">
+                    <i class="fas fa-map-marker-alt text-primary mr-2"></i>
+                    Location
+                </label>
+                {{ form.location }}
+                {% if form.location.errors %}
+                    <div class="text-red-600 text-sm">{{ form.location.errors }}</div>
+                {% endif %}
+            </div>
+
+            <!-- Enhanced Submit Button Section -->
+            <div class="flex justify-end space-x-4 pt-4 border-t border-gray-100">
+                <a href="{% url 'profile' user.username %}" 
+                   class="px-6 py-3 border border-gray-200 rounded-xl text-gray-700 hover:bg-gray-50 transition-colors">
+                    Cancel
+                </a>
+                <button type="submit" 
+                        class="px-6 py-3 bg-gradient-to-r from-primary to-secondary text-white rounded-xl 
+                               hover:opacity-90 transition-all duration-200 shadow-lg shadow-primary/20">
+                    <i class="fas fa-save mr-2"></i>
+                    Save Changes
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<style>
+    /* Enhanced Form Styling */
+    form input[type="text"],
+    form textarea {
+        @apply w-full border border-gray-200 rounded-xl shadow-sm py-3 px-4;
+        @apply focus:ring-2 focus:ring-primary/20 focus:border-primary focus:outline-none;
+        @apply bg-gray-50 transition-all duration-200;
+    }
+
+    form textarea {
+        @apply h-32 resize-none;
+    }
+
+    /* File Input Styling */
+    input[type="file"] {
+        @apply block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4;
+        @apply file:rounded-full file:border-0 file:text-sm file:font-semibold;
+        @apply file:bg-primary/10 file:text-primary hover:file:bg-primary/20;
+        @apply cursor-pointer focus:outline-none;
+    }
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Avatar Preview
+    const avatarInput = document.querySelector('input[type="file"]');
+    const avatarPreview = document.getElementById('avatarPreview');
+    const avatarPlaceholder = document.getElementById('avatarPlaceholder');
+
+    avatarInput.addEventListener('change', function(e) {
+        if (this.files && this.files[0]) {
+            const reader = new FileReader();
+            
+            reader.onload = function(e) {
+                if (avatarPreview) {
+                    avatarPreview.src = e.target.result;
+                } else {
+                    const newPreview = document.createElement('img');
+                    newPreview.src = e.target.result;
+                    newPreview.id = 'avatarPreview';
+                    newPreview.className = 'w-28 h-28 rounded-2xl object-cover ring-4 ring-primary/20';
+                    avatarPlaceholder.replaceWith(newPreview);
+                }
+            }
+            
+            reader.readAsDataURL(this.files[0]);
+        }
+    });
+
+    // Bio Character Counter
+    const bioTextarea = document.querySelector('textarea[name="bio"]');
+    const bioCounter = document.getElementById('bioCounter');
+
+    function updateBioCounter() {
+        const count = bioTextarea.value.length;
+        bioCounter.textContent = `${count}/500 characters`;
+        bioCounter.className = count > 450 ? 'text-sm text-warning' : 'text-sm text-gray-500';
+    }
+
+    bioTextarea.addEventListener('input', updateBioCounter);
+    updateBioCounter(); // Initial count
+});
+</script>
+{% endblock %}

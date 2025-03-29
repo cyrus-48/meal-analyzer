@@ -1,0 +1,380 @@
+{% extends 'base.html' %}
+
+{% block title %}New Food Analysis{% endblock %}
+
+{% block content %}
+<div class="min-h-screen bg-gray-50 py-12">
+    <div class="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
+        <!-- Card Container -->
+        <div class="bg-white rounded-2xl shadow-xl p-8 border border-gray-100">
+            <!-- Header -->
+            <div class="flex items-center justify-between mb-8">
+                <div>
+                    <h1 class="text-3xl font-bold bg-gradient-to-r from-primary to-secondary 
+                               text-transparent bg-clip-text">Analyze Food</h1>
+                    <p class="mt-2 text-gray-600">Get instant AI-powered nutritional insights</p>
+                </div>
+                <a href="{% url 'home' %}" 
+                   class="group flex items-center justify-center w-10 h-10 rounded-full 
+                          bg-gray-50 text-gray-500 hover:bg-red-50 hover:text-red-500 
+                          transition-all duration-200">
+                    <i class="fas fa-times group-hover:rotate-90 transition-transform"></i>
+                </a>
+            </div>
+
+            <form method="post" enctype="multipart/form-data" id="analysis-form" class="space-y-8">
+                {% csrf_token %}
+
+                <!-- Image Upload -->
+                <div>
+                    <label class="flex items-center text-sm font-medium text-gray-700 mb-2">
+                        <i class="fas fa-camera mr-2 text-primary"></i>
+                        Food Image <span class="text-red-500 ml-1">*</span>
+                    </label>
+                    <div class="relative group">
+                        <div class="absolute inset-0 bg-gradient-to-r from-primary to-secondary 
+                                  rounded-xl blur-lg opacity-5 group-hover:opacity-10 transition-opacity"></div>
+                        <div class="relative mt-1 flex justify-center px-6 pt-5 pb-6 border-2 
+                                  border-dashed border-gray-300 rounded-xl bg-white transition-all 
+                                  duration-200 group-hover:border-primary" id="dropzone">
+                            <div class="space-y-1 text-center">
+                                <!-- Image Preview -->
+                                <div id="preview-container" class="hidden space-y-4">
+                                    <img id="preview" src="#" alt="Food Preview" 
+                                         class="mx-auto h-48 w-auto rounded-lg shadow-md 
+                                                transition-transform duration-200 hover:scale-105">
+                                    <button type="button" id="remove-image" 
+                                            class="inline-flex items-center space-x-2 text-sm text-red-500 
+                                                   hover:text-red-600 transition-colors">
+                                        <i class="fas fa-trash"></i>
+                                        <span>Remove Image</span>
+                                    </button>
+                                </div>
+
+                                <!-- Upload Prompt -->
+                                <div id="upload-prompt" class="space-y-4">
+                                    <div class="mx-auto h-12 w-12 text-gray-400">
+                                        <i class="fas fa-cloud-upload-alt text-4xl animate-bounce"></i>
+                                    </div>
+                                    <div>
+                                        <label for="{{ form.image.id_for_label }}" 
+                                               class="relative cursor-pointer rounded-md font-medium 
+                                                      text-primary hover:text-secondary transition-colors">
+                                            <span>Upload a file</span>
+                                            {{ form.image }}
+                                        </label>
+                                        <p class="text-gray-600 mt-1">or drag and drop</p>
+                                        <p class="text-xs text-gray-500 mt-2">
+                                            PNG, JPG, GIF up to 10MB
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% if form.image.errors %}
+                        <p class="mt-2 text-sm text-red-600">
+                            <i class="fas fa-exclamation-circle mr-1"></i>
+                            {{ form.image.errors.0 }}
+                        </p>
+                    {% endif %}
+                </div>
+
+                <!-- Analysis Details -->
+                <div class="grid gap-6">
+                    <!-- Title -->
+                    <div>
+                        <label for="{{ form.title.id_for_label }}" 
+                               class="flex items-center text-sm font-medium text-gray-700 mb-2">
+                            <i class="fas fa-heading mr-2 text-primary"></i>
+                            Title <span class="text-gray-400 ml-1">(Optional)</span>
+                        </label>
+                        {{ form.title }}
+                        {% if form.title.errors %}
+                            <p class="mt-2 text-sm text-red-600">
+                                <i class="fas fa-exclamation-circle mr-1"></i>
+                                {{ form.title.errors.0 }}
+                            </p>
+                        {% endif %}
+                    </div>
+
+                    <!-- Description -->
+                    <div>
+                        <label for="{{ form.description.id_for_label }}" 
+                               class="flex items-center text-sm font-medium text-gray-700 mb-2">
+                            <i class="fas fa-align-left mr-2 text-primary"></i>
+                            Description <span class="text-gray-400 ml-1">(Optional)</span>
+                        </label>
+                        {{ form.description }}
+                        {% if form.description.errors %}
+                            <p class="mt-2 text-sm text-red-600">
+                                <i class="fas fa-exclamation-circle mr-1"></i>
+                                {{ form.description.errors.0 }}
+                            </p>
+                        {% endif %}
+                    </div>
+
+                    <!-- Privacy Toggle -->
+                    <div class="flex items-start space-x-3">
+                        <div class="flex items-center h-5">
+                            {{ form.is_public }}
+                        </div>
+                        <div class="flex flex-col">
+                            <label for="{{ form.is_public.id_for_label }}" 
+                                   class="font-medium text-gray-700">
+                                <i class="fas fa-globe mr-2 text-primary"></i>
+                                Public Analysis
+                            </label>
+                            <p class="text-sm text-gray-500">
+                                Make this analysis visible to other users
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="flex justify-end items-center space-x-4 pt-6 border-t border-gray-100">
+                    <a href="{% url 'home' %}" 
+                       class="px-6 py-3 border-2 border-gray-200 rounded-xl text-gray-700 
+                              hover:bg-gray-50 hover:border-gray-300 transition-all duration-200">
+                        Cancel
+                    </a>
+                    <button type="submit" 
+                            class="group relative inline-flex items-center space-x-2 bg-gradient-to-r 
+                                   from-primary to-secondary text-white px-6 py-3 rounded-xl 
+                                   hover:opacity-90 transition-all duration-200 shadow-lg 
+                                   shadow-primary/20 disabled:opacity-50 disabled:cursor-not-allowed">
+                        <span class="absolute inset-0 bg-white/20 rounded-xl opacity-0 
+                                   group-hover:opacity-100 transition-opacity"></span>
+                        <i class="fas fa-magic"></i>
+                        <span>Analyze Food</span>
+                    </button>
+                </div>
+            </form>
+
+            <!-- Loading Overlay -->
+            <div id="loading-overlay" 
+                 class="fixed inset-0 bg-black/50 backdrop-blur-sm hidden z-50 
+                        flex flex-col items-center justify-center">
+                <div class="bg-white rounded-2xl p-8 max-w-sm w-full mx-4 text-center 
+                          space-y-6 shadow-2xl">
+                    <div class="relative mx-auto w-16 h-16">
+                        <div class="absolute inset-0 bg-gradient-to-r from-primary to-secondary 
+                                  rounded-full blur opacity-20 animate-pulse"></div>
+                        <svg class="relative animate-spin" viewBox="0 0 24 24" fill="none">
+                            <circle class="opacity-25" cx="12" cy="12" r="10" 
+                                    stroke="currentColor" stroke-width="4"></circle>
+                            <path class="opacity-75" fill="currentColor" 
+                                  d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z">
+                            </path>
+                        </svg>
+                    </div>
+                    <div class="space-y-2">
+                        <h3 class="text-lg font-bold text-gray-900" id="loading-text">
+                            Analyzing your food...
+                        </h3>
+                        <p class="text-sm text-gray-600">
+                            Our AI is identifying ingredients and calculating nutritional information
+                        </p>
+                    </div>
+                    <div class="relative w-full h-2 bg-gray-100 rounded-full overflow-hidden">
+                        <div class="absolute inset-y-0 left-0 bg-gradient-to-r from-primary 
+                                  to-secondary w-full animate-progress"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    @keyframes progress {
+        0% { transform: translateX(-100%); }
+        100% { transform: translateX(100%); }
+    }
+    
+    .animate-progress {
+        animation: progress 2s linear infinite;
+    }
+
+    input[type="file"] {
+        @apply sr-only;
+    }
+
+    input[type="text"],
+    textarea {
+        @apply block w-full border-2 border-gray-200 rounded-xl shadow-sm py-3 px-4;
+        @apply focus:ring-2 focus:ring-primary/20 focus:border-primary focus:outline-none;
+        @apply transition-all duration-200;
+    }
+
+    textarea {
+        @apply h-32 resize-y;
+    }
+
+    input[type="checkbox"] {
+        @apply h-4 w-4 rounded border-gray-300 text-primary focus:ring-primary;
+    }
+</style>
+
+{% block extra_js %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const form = document.getElementById('analysis-form');
+    const dropzone = document.getElementById('dropzone');
+    const fileInput = document.querySelector('input[type="file"]');
+    const preview = document.getElementById('preview');
+    const previewContainer = document.getElementById('preview-container');
+    const uploadPrompt = document.getElementById('upload-prompt');
+    const removeButton = document.getElementById('remove-image');
+    const submitButton = form.querySelector('button[type="submit"]');
+    const loadingOverlay = document.getElementById('loading-overlay');
+    const loadingText = document.getElementById('loading-text');
+
+    // Disable submit button if no image
+    submitButton.disabled = !fileInput.files.length;
+
+    // File handling functions
+    function handleFileSelect(e) {
+        const file = this.files[0];
+        if (file) {
+            if (validateFile(file)) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    preview.src = e.target.result;
+                    previewContainer.classList.remove('hidden');
+                    uploadPrompt.classList.add('hidden');
+                    submitButton.disabled = false;
+                    showToast('Image uploaded successfully! 🎉');
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+    }
+
+    function validateFile(file) {
+        const validTypes = ['image/jpeg', 'image/png', 'image/gif'];
+        const maxSize = 10 * 1024 * 1024; // 10MB
+
+        if (!validTypes.includes(file.type)) {
+            showToast('Please upload a valid image file (PNG, JPG, GIF)', 'error');
+            return false;
+        }
+
+        if (file.size > maxSize) {
+            showToast('File size must be less than 10MB', 'error');
+            return false;
+        }
+
+        return true;
+    }
+
+    // Event listeners
+    fileInput.addEventListener('change', handleFileSelect);
+
+    removeButton.addEventListener('click', function() {
+        fileInput.value = '';
+        preview.src = '#';
+        previewContainer.classList.add('hidden');
+        uploadPrompt.classList.remove('hidden');
+        submitButton.disabled = true;
+    });
+
+    // Drag and drop handling
+    ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+        dropzone.addEventListener(eventName, preventDefaults, false);
+    });
+
+    function preventDefaults(e) {
+        e.preventDefault();
+        e.stopPropagation();
+    }
+
+    ['dragenter', 'dragover'].forEach(eventName => {
+        dropzone.addEventListener(eventName, highlight, false);
+    });
+
+    ['dragleave', 'drop'].forEach(eventName => {
+        dropzone.addEventListener(eventName, unhighlight, false);
+    });
+
+    function highlight(e) {
+        dropzone.classList.add('border-primary', 'bg-primary/5');
+    }
+
+    function unhighlight(e) {
+        dropzone.classList.remove('border-primary', 'bg-primary/5');
+    }
+
+    dropzone.addEventListener('drop', function(e) {
+        const dt = e.dataTransfer;
+        const files = dt.files;
+
+        if (files.length) {
+            fileInput.files = files;
+            handleFileSelect.call(fileInput);
+        }
+    });
+
+    // Form submission
+    form.addEventListener('submit', function(e) {
+        if (!fileInput.files[0]) {
+            e.preventDefault();
+            showToast('Please select an image first! 📸', 'error');
+            return;
+        }
+
+        loadingOverlay.classList.remove('hidden');
+        
+        // Don't prevent form submission - let it proceed normally
+    });
+
+    // Toast notification
+    function showToast(message, type = 'success') {
+        const toast = document.createElement('div');
+        toast.className = `fixed bottom-4 right-4 px-6 py-3 rounded-xl shadow-lg backdrop-blur-sm 
+                          transition-all duration-300 transform translate-y-0 z-50 
+                          ${type === 'error' ? 'bg-red-500' : 'bg-black/75'} text-white`;
+        toast.textContent = message;
+        document.body.appendChild(toast);
+
+        // Animate in
+        requestAnimationFrame(() => {
+            toast.style.transform = 'translateY(0)';
+            toast.style.opacity = '1';
+        });
+
+        // Animate out
+        setTimeout(() => {
+            toast.style.transform = 'translateY(20px)';
+            toast.style.opacity = '0';
+            setTimeout(() => toast.remove(), 300);
+        }, 3000);
+    }
+
+    // Add auto-refresh functionality for the analysis detail page
+    if (window.location.pathname.includes('/analysis/')) {
+        const status = document.querySelector('[data-analysis-status]');
+        if (status && status.dataset.analysisStatus === 'pending') {
+            setTimeout(function checkStatus() {
+                fetch(window.location.href)
+                    .then(response => response.text())
+                    .then(html => {
+                        const parser = new DOMParser();
+                        const doc = parser.parseFromString(html, 'text/html');
+                        const newStatus = doc.querySelector('[data-analysis-status]');
+                        
+                        if (newStatus && newStatus.dataset.analysisStatus !== 'pending') {
+                            window.location.reload();
+                        } else {
+                            setTimeout(checkStatus, 5000); // Check again in 5 seconds
+                        }
+                    });
+            }, 5000);
+        }
+    }
+});
+</script>
+{% endblock %}
+
+{% endblock %}

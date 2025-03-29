@@ -1,0 +1,190 @@
+{% extends 'base.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+    <!-- Main Content -->
+    <div class="lg:col-span-8">
+        <!-- Hero Section -->
+        {% if not user.is_authenticated %}
+        <div class="bg-gradient-to-br from-white to-gray-50 rounded-2xl shadow-xl p-8 mb-8 border border-gray-100">
+            <div class="relative overflow-hidden">
+                <div class="absolute top-0 right-0 -mt-8 -mr-8 w-32 h-32 bg-gradient-to-br from-primary/20 to-secondary/20 rounded-full blur-3xl"></div>
+                <h1 class="text-5xl font-bold text-gray-900 mb-4 leading-tight">Discover Your Food's <span class="bg-gradient-to-r from-primary to-secondary text-transparent bg-clip-text">Hidden Story</span></h1>
+                <p class="text-lg text-gray-600 mb-8 max-w-2xl">Unlock detailed nutritional insights instantly with our AI-powered food analysis. Simply upload a photo and get comprehensive ingredient breakdowns, calorie counts, and nutrient information.</p>
+                <div class="flex flex-wrap gap-4">
+                    <a href="{% url 'signup' %}" class="group relative inline-flex items-center justify-center bg-gradient-to-r from-primary to-secondary text-white px-8 py-4 rounded-xl hover:opacity-90 transform transition-all duration-200 hover:scale-105 shadow-lg shadow-primary/20">
+                        <span class="absolute inset-0 bg-white/20 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity"></span>
+                        <i class="fas fa-rocket mr-2"></i>
+                        Get Started Free
+                    </a>
+                    <a href="{% url 'about' %}" class="relative inline-flex items-center justify-center px-8 py-4 rounded-xl border-2 border-primary text-primary hover:bg-primary hover:text-white transition-all duration-200 group">
+                        <i class="fas fa-info-circle mr-2 group-hover:rotate-12 transition-transform"></i>
+                        Learn More
+                    </a>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+
+        <!-- Recent Analyses -->
+        <div class="bg-white rounded-2xl shadow-xl p-6 mb-8 border border-gray-100">
+            <div class="flex justify-between items-center mb-8">
+                <div>
+                    <h2 class="text-2xl font-bold text-gray-900">Recent Analyses</h2>
+                    <p class="text-gray-600 mt-1">Discover what others are analyzing</p>
+                </div>
+                <a href="{% url 'explore' %}" class="flex items-center space-x-2 text-primary hover:text-secondary transition-colors">
+                    <span>View All</span>
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+            
+            {% if analyses %}
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {% for analysis in analyses %}
+                 
+                <!--  food component-->
+                {% include 'components/food.html' with analysis=analysis %}
+                
+                {% endfor %}
+            </div>
+            {% else %}
+            <div class="text-center py-12 bg-gray-50 rounded-xl border-2 border-dashed border-gray-200">
+                <div class="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <i class="fas fa-utensils text-2xl text-primary"></i>
+                </div>
+                <p class="text-gray-600 mb-4">No analyses yet. Be the first to analyze your food!</p>
+                <a href="{% url 'analysis-create' %}" 
+                   class="inline-flex items-center space-x-2 bg-gradient-to-r from-primary to-secondary text-white px-6 py-3 rounded-xl hover:opacity-90 transition-all duration-200 shadow-lg shadow-primary/20">
+                    <i class="fas fa-plus"></i>
+                    <span>Analyze Food</span>
+                </a>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- Sidebar -->
+    <div class="lg:col-span-4 space-y-6">
+        {% if user.is_authenticated %}
+        <!-- User's Recent Analyses -->
+        <div class="bg-white rounded-2xl shadow-xl p-6 border border-gray-100">
+            <div class="flex items-center justify-between mb-6">
+                <h3 class="text-lg font-bold text-gray-900">Your Analyses</h3>
+                <span class="text-sm text-gray-500">{{ user_analyses|length }} total</span>
+            </div>
+            {% if user_analyses %}
+                <div class="space-y-4">
+                    {% for analysis in user_analyses %}
+                    <div class="group flex items-center space-x-4 p-2 rounded-xl hover:bg-gray-50 transition-colors">
+                        <img src="{{ analysis.image.url }}" alt="Food" 
+                             class="w-16 h-16 rounded-xl object-cover group-hover:scale-105 transition-transform">
+                        <div class="flex-1 min-w-0">
+                            <h4 class="font-medium text-gray-900 truncate group-hover:text-primary transition-colors">
+                                {{ analysis.title|default:'Untitled Analysis' }}
+                            </h4>
+                            <p class="text-sm text-gray-600">{{ analysis.created_at|timesince }} ago</p>
+                        </div>
+                        <a href="{{ analysis.get_absolute_url }}" 
+                           class="text-primary hover:text-secondary transition-colors">
+                            <i class="fas fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
+                        </a>
+                    </div>
+                    {% endfor %}
+                </div>
+                <a href="{% url 'profile' user.username %}" 
+                   class="mt-6 block text-center text-primary hover:text-secondary transition-colors">
+                    View All Your Analyses
+                </a>
+            {% else %}
+                <div class="text-center py-8">
+                    <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-camera text-xl text-primary"></i>
+                    </div>
+                    <p class="text-gray-600 mb-4">You haven't analyzed any food yet.</p>
+                    <a href="{% url 'analysis-create' %}" 
+                       class="inline-flex items-center space-x-2 bg-gradient-to-r from-primary to-secondary text-white px-4 py-2 rounded-xl hover:opacity-90 transition-all duration-200">
+                        <i class="fas fa-plus"></i>
+                        <span>Start Analyzing</span>
+                    </a>
+                </div>
+            {% endif %}
+        </div>
+        {% endif %}
+
+        <!-- Trending Topics -->
+        <div class="bg-white rounded-2xl shadow-xl p-6 border border-gray-100">
+            <h3 class="text-lg font-bold text-gray-900 mb-4">Trending Topics</h3>
+            <div class="space-y-2">
+                <a href="#" class="group flex items-center justify-between p-3 bg-gray-50 rounded-xl hover:bg-primary/5 transition-colors">
+                    <span class="text-gray-700 group-hover:text-primary">#HealthyEating</span>
+                    <span class="text-sm text-gray-500">2.4k posts</span>
+                </a>
+                <a href="#" class="group flex items-center justify-between p-3 bg-gray-50 rounded-xl hover:bg-primary/5 transition-colors">
+                    <span class="text-gray-700 group-hover:text-primary">#NutritionFacts</span>
+                    <span class="text-sm text-gray-500">1.8k posts</span>
+                </a>
+                <a href="#" class="group flex items-center justify-between p-3 bg-gray-50 rounded-xl hover:bg-primary/5 transition-colors">
+                    <span class="text-gray-700 group-hover:text-primary">#MealPrep</span>
+                    <span class="text-sm text-gray-500">956 posts</span>
+                </a>
+            </div>
+        </div>
+
+        <!-- Quick Stats -->
+        <div class="bg-gradient-to-br from-primary to-secondary rounded-2xl shadow-xl p-6 text-white">
+            <h3 class="text-lg font-bold mb-4">Quick Stats</h3>
+            <div class="grid grid-cols-2 gap-4">
+                <div class="bg-white/10 rounded-xl p-4">
+                    <div class="text-2xl font-bold">{{ analyses.count }}</div>
+                    <div class="text-sm text-white/80">Total Analyses</div>
+                </div>
+                <div class="bg-white/10 rounded-xl p-4">
+                    <div class="text-2xl font-bold">{{ request.user.profile.total_likes }}</div>
+                    <div class="text-sm text-white/80">Total Likes</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Like functionality with animation
+    document.querySelectorAll('.like-button').forEach(button => {
+        button.addEventListener('click', function() {
+            const analysisId = this.dataset.id;
+            const icon = this.querySelector('i');
+            const count = this.querySelector('.like-count');
+            
+            // Add click animation
+            icon.classList.add('scale-150');
+            setTimeout(() => icon.classList.remove('scale-150'), 200);
+
+            fetch(`/analysis/${analysisId}/like/`, {
+                method: 'POST',
+                headers: {
+                    'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value,
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                icon.classList.toggle('text-red-500');
+                count.textContent = data.count;
+                
+                // Show success indicator
+                const success = document.createElement('div');
+                success.className = 'fixed bottom-4 right-4 bg-green-500 text-white px-4 py-2 rounded-lg shadow-lg';
+                success.textContent = data.liked ? 'Added to favorites!' : 'Removed from favorites';
+                document.body.appendChild(success);
+                setTimeout(() => success.remove(), 2000);
+            });
+        });
+    });
+});
+</script>
+{% endblock %}

@@ -1,0 +1,206 @@
+{% extends 'base.html' %}
+
+{% block title %}About FoodAI{% endblock %}
+
+{% block content %}
+<div class="min-h-screen bg-gray-50 py-12">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <!-- Hero Section -->
+        <div class="relative bg-white rounded-2xl shadow-xl p-8 mb-12 border border-gray-100 overflow-hidden">
+            <div class="absolute inset-0 bg-gradient-to-br from-primary/5 to-secondary/5"></div>
+            <div class="relative">
+                <h1 class="text-5xl font-bold mb-6">
+                    About <span class="bg-gradient-to-r from-primary to-secondary text-transparent bg-clip-text">FoodAI</span>
+                </h1>
+                <p class="text-xl text-gray-600 mb-8 max-w-3xl">
+                    FoodAI is a cutting-edge platform that combines artificial intelligence with nutritional analysis 
+                    to help you make informed decisions about your food choices.
+                </p>
+                {% if not user.is_authenticated %}
+                    <div class="flex space-x-4">
+                        <a href="{% url 'signup' %}" 
+                           class="group relative inline-flex items-center space-x-2 px-8 py-4 bg-gradient-to-r 
+                                  from-primary to-secondary text-white rounded-xl hover:opacity-90 
+                                  transition-all duration-200 shadow-lg shadow-primary/20">
+                            <span class="absolute inset-0 bg-white/20 rounded-xl opacity-0 
+                                       group-hover:opacity-100 transition-opacity"></span>
+                            <span>Join Our Community</span>
+                            <i class="fas fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
+                        </a>
+                        <a href="#how-it-works" 
+                           class="inline-flex items-center space-x-2 px-8 py-4 border-2 border-gray-200 
+                                  rounded-xl text-gray-700 hover:bg-gray-50 hover:border-primary 
+                                  transition-all duration-200">
+                            <i class="fas fa-play text-primary"></i>
+                            <span>How It Works</span>
+                        </a>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+
+        <!-- Features Grid -->
+        <div class="grid md:grid-cols-3 gap-8 mb-12">
+            <!-- AI Analysis -->
+            <div class="group bg-white rounded-2xl p-8 shadow-lg border border-gray-100 
+                      hover:-translate-y-1 transition-all duration-300">
+                <div class="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center 
+                           mb-6 text-primary group-hover:scale-110 transition-transform">
+                    <i class="fas fa-robot text-3xl"></i>
+                </div>
+                <h3 class="text-xl font-bold mb-4">AI-Powered Analysis</h3>
+                <p class="text-gray-600 leading-relaxed">
+                    Advanced AI technology analyzes your food images to provide accurate nutritional 
+                    information instantly.
+                </p>
+            </div>
+
+            <!-- Insights -->
+            <div class="group bg-white rounded-2xl p-8 shadow-lg border border-gray-100 
+                      hover:-translate-y-1 transition-all duration-300">
+                <div class="w-16 h-16 rounded-2xl bg-secondary/10 flex items-center justify-center 
+                           mb-6 text-secondary group-hover:scale-110 transition-transform">
+                    <i class="fas fa-chart-pie text-3xl"></i>
+                </div>
+                <h3 class="text-xl font-bold mb-4">Detailed Insights</h3>
+                <p class="text-gray-600 leading-relaxed">
+                    Get comprehensive information about calories, nutrients, and ingredients in your food.
+                </p>
+            </div>
+
+            <!-- Community -->
+            <div class="group bg-white rounded-2xl p-8 shadow-lg border border-gray-100 
+                      hover:-translate-y-1 transition-all duration-300">
+                <div class="w-16 h-16 rounded-2xl bg-green-500/10 flex items-center justify-center 
+                           mb-6 text-green-500 group-hover:scale-110 transition-transform">
+                    <i class="fas fa-users text-3xl"></i>
+                </div>
+                <h3 class="text-xl font-bold mb-4">Community Sharing</h3>
+                <p class="text-gray-600 leading-relaxed">
+                    Share your food analyses and discover insights from other community members.
+                </p>
+            </div>
+        </div>
+
+        <!-- How It Works -->
+        <div id="how-it-works" class="bg-white rounded-2xl shadow-xl p-12 mb-12 border border-gray-100">
+            <h2 class="text-4xl font-bold text-center mb-12">How It Works</h2>
+            <div class="relative">
+                <!-- Connection Line -->
+                <div class="absolute top-1/2 left-0 w-full h-0.5 bg-gradient-to-r from-primary 
+                          to-secondary -translate-y-1/2 opacity-20"></div>
+                
+                <!-- Steps -->
+                <div class="relative grid md:grid-cols-3 gap-12">
+                    {% for step in "123" %}
+                    <div class="relative">
+                        <div class="absolute -top-6 left-1/2 -translate-x-1/2 w-12 h-12 rounded-full 
+                                  bg-gradient-to-r from-primary to-secondary text-white flex 
+                                  items-center justify-center font-bold text-lg shadow-lg shadow-primary/20">
+                            {{ step }}
+                        </div>
+                        <div class="bg-white rounded-2xl p-8 shadow-lg border border-gray-100">
+                            <div class="w-16 h-16 mx-auto mb-6 text-primary">
+                                <i class="fas {% if step == '1' %}fa-camera{% elif step == '2' %}fa-magic{% else %}fa-chart-bar{% endif %} text-4xl"></i>
+                            </div>
+                            <h3 class="text-xl font-bold mb-4 text-center">
+                                {% if step == '1' %}
+                                    Upload Your Food Photo
+                                {% elif step == '2' %}
+                                    AI Analysis
+                                {% else %}
+                                    Get Detailed Results
+                                {% endif %}
+                            </h3>
+                            <p class="text-gray-600 text-center leading-relaxed">
+                                {% if step == '1' %}
+                                    Take a photo of your meal or upload an existing image to start.
+                                {% elif step == '2' %}
+                                    Our AI identifies ingredients and calculates nutrition.
+                                {% else %}
+                                    View comprehensive analysis and make informed choices.
+                                {% endif %}
+                            </p>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
+        <!-- Contact Section -->
+        <div class="bg-gradient-to-br from-primary to-secondary rounded-2xl shadow-xl p-12 text-white">
+            <div class="text-center max-w-3xl mx-auto mb-12">
+                <h2 class="text-4xl font-bold mb-4">Get in Touch</h2>
+                <p class="text-white/80 text-lg">
+                    Have questions or feedback? We'd love to hear from you. Reach out to our team 
+                    for support or suggestions.
+                </p>
+            </div>
+            <div class="grid md:grid-cols-3 gap-8">
+                <a href="mailto:support@foodai.com" 
+                   class="flex items-center justify-center space-x-3 bg-white/10 rounded-xl p-6 
+                          backdrop-blur-sm hover:bg-white/20 transition-colors group">
+                    <i class="fas fa-envelope text-2xl group-hover:scale-110 transition-transform"></i>
+                    <span>support@foodai.com</span>
+                </a>
+                <a href="#" class="flex items-center justify-center space-x-3 bg-white/10 rounded-xl p-6 
+                                  backdrop-blur-sm hover:bg-white/20 transition-colors group">
+                    <i class="fab fa-twitter text-2xl group-hover:scale-110 transition-transform"></i>
+                    <span>@FoodAI</span>
+                </a>
+                <a href="#" class="flex items-center justify-center space-x-3 bg-white/10 rounded-xl p-6 
+                                  backdrop-blur-sm hover:bg-white/20 transition-colors group">
+                    <i class="fab fa-github text-2xl group-hover:scale-110 transition-transform"></i>
+                    <span>FoodAI Github</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.scroll-smooth {
+    scroll-behavior: smooth;
+}
+</style>
+
+{% block extra_js %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                target.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        });
+    });
+
+    // Intersection Observer for fade-in animations
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('opacity-100', 'translate-y-0');
+                entry.target.classList.remove('opacity-0', 'translate-y-4');
+            }
+        });
+    }, {
+        threshold: 0.1
+    });
+
+    // Observe all sections
+    document.querySelectorAll('.grid > div, .rounded-2xl').forEach((el) => {
+        el.classList.add('transition-all', 'duration-700', 'opacity-0', 'translate-y-4');
+        observer.observe(el);
+    });
+});
+</script>
+{% endblock %}
+
+{% endblock %}

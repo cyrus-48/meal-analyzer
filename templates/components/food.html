@@ -1,0 +1,51 @@
+<div class="group bg-gradient-to-br from-white to-gray-50 rounded-xl overflow-hidden border border-gray-100 hover:shadow-lg transition-all duration-200 hover:scale-[1.02]">
+    <div class="relative">
+        <img src="{{ analysis.image.url }}" alt="{{ analysis.title|default:'Food Analysis' }}" 
+             class="w-full h-48 object-cover transition-transform duration-200 group-hover:scale-105">
+        {% if analysis.calories.total %}
+        <div class="absolute bottom-2 left-2 bg-black/60 text-white px-3 py-1 rounded-full text-sm backdrop-blur-sm">
+            <i class="fas fa-fire-alt mr-1"></i>
+            {{ analysis.calories.total }} calories
+        </div>
+        {% endif %}
+    </div>
+    <div class="p-4">
+        <h3 class="font-semibold text-lg mb-2 group-hover:text-primary transition-colors">
+            {{ analysis.title|default:'Untitled Analysis' }}
+        </h3>
+        <div class="flex items-center text-sm text-gray-600 mb-3">
+            {% if analysis.user.profile.avatar %}
+            <img src="{{ analysis.user.profile.avatar.url }}" 
+                 alt="{{ analysis.user.username }}" 
+                 class="w-6 h-6 rounded-full ring-2 ring-primary/20">
+            {% else %}
+            <div class="w-6 h-6 rounded-full bg-gradient-to-br from-primary to-secondary text-white flex items-center justify-center">
+                <span class="text-xs font-medium">{{ analysis.user.username|make_list|first|upper }}</span>
+            </div>
+            {% endif %}
+            <span class="ml-2">{{ analysis.user.username }}</span>
+            <span class="mx-2">•</span>
+            <span>{{ analysis.created_at|timesince }} ago</span>
+        </div>
+        <div class="flex justify-between items-center">
+            <div class="flex items-center space-x-4">
+                <button class="like-button group flex items-center space-x-1 text-gray-600 hover:text-red-500 transition-colors" 
+                        data-id="{{ analysis.id }}">
+                    <i class="fas fa-heart group-hover:scale-110 transition-transform {% if user in analysis.likes.all %}text-red-500{% endif %}"></i>
+                    <span class="like-count">{{ analysis.likes.count }}</span>
+                </button>
+                {% if analysis.comments.count %}
+                <div class="flex items-center space-x-1 text-gray-600">
+                    <i class="fas fa-comment"></i>
+                    <span>{{ analysis.comments.count }}</span>
+                </div>
+                {% endif %}
+            </div>
+            <a href="{{ analysis.get_absolute_url }}" 
+               class="inline-flex items-center space-x-2 text-primary hover:text-secondary transition-colors">
+                <span>View Details</span>
+                <i class="fas fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
+            </a>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,295 @@
+{% extends 'base.html' %}
+
+{% block title %}Get Food Recommendations{% endblock %}
+
+{% block content %}
+<!-- Loading Overlay -->
+<div id="loadingOverlay" class="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 hidden">
+    <div class="flex flex-col items-center justify-center h-full">
+        <!-- Animated Cooking Pot -->
+        <div class="relative w-32 h-32 mb-4">
+            <!-- Steam Animation -->
+            <div class="absolute top-0 left-1/2 transform -translate-x-1/2">
+                <div class="steam-particle"></div>
+                <div class="steam-particle delay-300"></div>
+                <div class="steam-particle delay-500"></div>
+            </div>
+            
+            <!-- Pot -->
+            <div class="absolute bottom-0 w-full h-20 bg-gradient-to-r from-primary to-secondary rounded-3xl">
+                <!-- Bubbling Animation -->
+                <div class="absolute inset-x-4 top-4 h-4 overflow-hidden">
+                    <div class="bubbles-animation"></div>
+                </div>
+            </div>
+            
+            <!-- Lid -->
+            <div class="absolute bottom-16 w-full h-4 bg-gray-800 rounded-full"></div>
+        </div>
+        
+        <!-- Loading Text -->
+        <div class="text-white text-center">
+            <h3 class="text-xl font-bold mb-2">Cooking up your recommendations...</h3>
+            <p class="text-sm opacity-75" id="loadingText"></p>
+        </div>
+    </div>
+</div>
+
+<div class="max-w-4xl mx-auto px-4 py-8">
+    <div class="bg-white rounded-2xl shadow-xl p-8 border border-gray-100">
+        <!-- Header Section -->
+        <div class="text-center mb-8">
+            <h1 class="text-3xl font-bold bg-gradient-to-r from-primary to-secondary text-transparent bg-clip-text">
+                Get Personalized Food Recommendations
+            </h1>
+            <p class="text-gray-600 mt-2">Tell us about your preferences and we'll suggest the perfect meal</p>
+        </div>
+        
+        <form method="post" class="space-y-8">
+            {% csrf_token %}
+            
+            <!-- Main Form Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Meal Type -->
+                <div class="form-group">
+                    <label class="form-label">
+                        <i class="fas fa-utensils text-primary mr-2"></i>
+                        What meal are you planning?
+                    </label>
+                    {{ form.meal_type }}
+                    {% if form.meal_type.errors %}
+                        <p class="text-red-500 text-sm mt-1">{{ form.meal_type.errors|join:", " }}</p>
+                    {% endif %}
+                </div>
+
+                <!-- Family Size -->
+                <div class="form-group">
+                    <label class="form-label">
+                        <i class="fas fa-users text-primary mr-2"></i>
+                        How many people?
+                    </label>
+                    {{ form.family_size }}
+                    {% if form.family_size.errors %}
+                        <p class="text-red-500 text-sm mt-1">{{ form.family_size.errors|join:", " }}</p>
+                    {% endif %}
+                </div>
+
+                <!-- Age Ranges -->
+                <div class="form-group md:col-span-2">
+                    <label class="form-label">
+                        <i class="fas fa-child text-primary mr-2"></i>
+                        Age ranges of family members
+                    </label>
+                    {{ form.age_ranges }}
+                    <p class="text-sm text-gray-500 mt-1">
+                        <i class="fas fa-info-circle mr-1"></i>
+                        Example: 2 children: 5-7, 3 adults: 30-45
+                    </p>
+                    {% if form.age_ranges.errors %}
+                        <p class="text-red-500 text-sm mt-1">{{ form.age_ranges.errors|join:", " }}</p>
+                    {% endif %}
+                </div>
+
+                <!-- Region -->
+                <div class="form-group">
+                    <label class="form-label">
+                        <i class="fas fa-globe-africa text-primary mr-2"></i>
+                        Your region/location
+                    </label>
+                    {{ form.region }}
+                    {% if form.region.errors %}
+                        <p class="text-red-500 text-sm mt-1">{{ form.region.errors|join:", " }}</p>
+                    {% endif %}
+                </div>
+
+                <!-- Cultural Preferences -->
+                <div class="form-group">
+                    <label class="form-label">
+                        <i class="fas fa-heart text-primary mr-2"></i>
+                        Cultural preferences
+                    </label>
+                    {{ form.cultural_preferences }}
+                    {% if form.cultural_preferences.errors %}
+                        <p class="text-red-500 text-sm mt-1">{{ form.cultural_preferences.errors|join:", " }}</p>
+                    {% endif %}
+                </div>
+
+                <!-- Dietary Restrictions -->
+                <div class="form-group md:col-span-2">
+                    <label class="form-label">
+                        <i class="fas fa-exclamation-circle text-primary mr-2"></i>
+                        Dietary restrictions
+                    </label>
+                    {{ form.dietary_restrictions }}
+                    {% if form.dietary_restrictions.errors %}
+                        <p class="text-red-500 text-sm mt-1">{{ form.dietary_restrictions.errors|join:", " }}</p>
+                    {% endif %}
+                </div>
+            </div>
+
+            <!-- Submit Button -->
+            <div class="mt-8">
+                <button type="submit" 
+                        class="w-full bg-gradient-to-r from-primary to-secondary text-white 
+                               px-6 py-4 rounded-xl hover:opacity-90 transition-all duration-200 
+                               shadow-lg shadow-primary/20 flex items-center justify-center space-x-2">
+                    <i class="fas fa-magic"></i>
+                    <span>Generate Recommendations</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<style>
+    .form-group {
+        @apply space-y-2;
+    }
+
+    .form-label {
+        @apply block text-sm font-medium text-gray-700 mb-2 flex items-center;
+    }
+
+    input[type="text"],
+    input[type="number"],
+    select,
+    textarea {
+        @apply w-full border border-gray-300 rounded-xl px-4 py-3;
+        @apply focus:ring-2 focus:ring-primary/20 focus:border-primary;
+        @apply transition-all duration-200 bg-gray-50;
+        @apply placeholder-gray-400;
+    }
+
+    textarea {
+        @apply resize-none h-24;
+    }
+
+    select {
+        @apply appearance-none bg-no-repeat bg-right-4;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='currentColor'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'/%3E%3C/svg%3E");
+        background-size: 1.5em 1.5em;
+    }
+
+    /* Loading Animation Styles */
+    .steam-particle {
+        @apply absolute w-2 h-8 bg-white/20 rounded-full;
+        animation: steam 2s infinite;
+    }
+
+    .delay-300 {
+        animation-delay: 300ms;
+        left: -10px;
+    }
+
+    .delay-500 {
+        animation-delay: 500ms;
+        left: 10px;
+    }
+
+    @keyframes steam {
+        0% {
+            transform: translateY(0) scale(1);
+            opacity: 0;
+        }
+        50% {
+            opacity: 1;
+        }
+        100% {
+            transform: translateY(-40px) scale(1.5);
+            opacity: 0;
+        }
+    }
+
+    .bubbles-animation {
+        @apply h-full relative;
+        background: repeating-radial-gradient(
+            circle at center,
+            white 0,
+            white 2px,
+            transparent 2px,
+            transparent 8px
+        );
+        animation: bubble 800ms infinite linear;
+    }
+
+    @keyframes bubble {
+        from {
+            transform: translateY(0);
+        }
+        to {
+            transform: translateY(-8px);
+        }
+    }
+
+    /* Add smooth transition for overlay */
+    #loadingOverlay {
+        transition: opacity 0.3s ease-in-out;
+        opacity: 0;
+    }
+
+    #loadingOverlay:not(.hidden) {
+        opacity: 1;
+    }
+
+    /* Ensure pot animation stays inside overlay */
+    .steam-particle {
+        @apply absolute w-2 h-8 bg-white/20 rounded-full z-[10000];
+    }
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const form = document.querySelector('form');
+    const overlay = document.getElementById('loadingOverlay');
+    const loadingText = document.getElementById('loadingText');
+    let messageInterval;
+    
+    const loadingMessages = [
+        "Analyzing your preferences...",
+        "Considering dietary requirements...",
+        "Checking regional ingredients...",
+        "Calculating nutritional balance...",
+        "Preparing personalized suggestions..."
+    ];
+    
+    let messageIndex = 0;
+    
+    function rotateLoadingMessage() {
+        loadingText.textContent = loadingMessages[messageIndex];
+        messageIndex = (messageIndex + 1) % loadingMessages.length;
+    }
+    
+    form.addEventListener('submit', function(e) {
+        // Prevent default form submission
+        e.preventDefault();
+        
+        // Show overlay
+        overlay.classList.remove('hidden');
+        
+        // Start rotating messages
+        rotateLoadingMessage();
+        messageInterval = setInterval(rotateLoadingMessage, 2000);
+        
+        // Add loading state to button
+        const button = form.querySelector('button[type="submit"]');
+        button.disabled = true;
+        button.innerHTML = `
+            <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+            </svg>
+            Generating...
+        `;
+        
+        // Submit form after a short delay to show animation
+        setTimeout(() => {
+            // Clear the message interval
+            clearInterval(messageInterval);
+            
+            // Submit the form
+            form.submit();
+        }, 500);
+    });
+});
+</script>
+{% endblock %}

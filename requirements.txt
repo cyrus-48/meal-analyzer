@@ -1,0 +1,22 @@
+# Core Django
+Django==5.1.7
+python-dotenv==1.0.1
+whitenoise==6.6.0
+
+# Image Processing
+Pillow==10.2.0
+
+# API Requests
+requests==2.31.0
+
+# WSGI Server
+gunicorn==21.2.0
+
+# Database
+psycopg2-binary==2.9.9  # For PostgreSQL (optional)
+
+# Development
+django-debug-toolbar==4.3.0
+
+# Security
+django-cors-headers==4.3.1

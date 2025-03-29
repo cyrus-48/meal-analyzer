@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FoodAI - {% block title %}Food Analysis Platform{% endblock %}</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#10B981',
+                        secondary: '#059669',
+                        accent: '#FBBF24',
+                        dark: '#1F2937',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                }
+            }
+        }
+        
+
+        
+    </script>
+    <style>
+        @keyframes progress {
+        0% { transform: translateX(-100%); }
+        100% { transform: translateX(100%); }
+    }
+    
+    .animate-progress {
+        animation: progress 2s linear infinite;
+    }
+    
+    @keyframes bounce {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-1rem); }
+    }
+    .animate-bounce {
+        animation: bounce 1s infinite;
+    }
+    
+    /* Add any other custom styles needed */
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-gray-50 to-gray-100 min-h-screen flex flex-col">
+    <!-- Navigation -->
+    <nav class="glass-effect sticky top-0 z-50 border-b border-gray-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center">
+                    <a href="{% url 'home' %}" class="flex items-center space-x-2">
+                        <i class="fas fa-leaf text-3xl text-primary"></i>
+                        <span class="text-2xl font-bold bg-gradient-to-r from-primary to-secondary text-transparent bg-clip-text">FoodAI</span>
+                    </a>
+                    <div class="hidden md:block ml-10">
+                        <div class="flex items-baseline space-x-6">
+                            <!-- HOme link-->
+                           {% include 'components/navbar_link.html' with  text='home'  url='home' icon='fas fa-home' %}
+                            <!-- Explore link-->
+                            {% include 'components/navbar_link.html' with  text='explore'  url='explore' icon='fas fa-search' %}
+                            <!-- About link-->
+                            {% include 'components/navbar_link.html' with  text='about'  url='about' icon='fas fa-info-circle' %}  
+                        </div>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-4">
+                    {% if user.is_authenticated %}
+                        <a href="{% url 'analysis-create' %}" class="bg-gradient-to-r from-primary to-secondary  text-white px-4 py-2 rounded-lg hover:opacity-90 transition-all duration-200 shadow-lg shadow-primary/20">
+                            <i class="fas fa-plus mr-2"></i>Analyze Food
+                        </a>
+                        <div class="relative" x-data="{ open: false }">
+                            <button @click="open = !open" class="flex items-center space-x-2 px-3 py-2 rounded-lg hover:bg-gray-50 transition-all duration-200">
+                                {% if user.profile.avatar %}
+                                    <img src="{{ user.profile.avatar.url }}" alt="Profile" class="w-8 h-8 rounded-full ring-2 ring-primary/20">
+                                {% else %}
+                                    <div class="w-8 h-8 rounded-full bg-gradient-to-br from-primary to-secondary text-white flex items-center justify-center">
+                                        <span class="text-sm font-medium">{{ user.username|make_list|first|upper }}</span>
+                                    </div>
+                                {% endif %}
+                                <span class="text-gray-700">{{ user.username }}</span>
+                                <i class="fas fa-chevron-down text-sm text-gray-400"></i>
+                            </button>
+                            <div x-show="open" @click.away="open = false" x-transition class="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-xl py-2 border border-gray-100">
+                                <a href="{% url 'profile' user.username %}" class="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-50">
+                                    <i class="fas fa-user mr-2 text-primary"></i>Profile
+                                </a>
+                               <!-- For dropdown menu version -->
+                                <form method="post" action="{% url 'logout' %}" class="block w-full">
+                                    {% csrf_token %}
+                                    <button type="submit" 
+                                            class="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 
+                                                transition-colors flex items-center space-x-2">
+                                        <i class="fas fa-sign-out-alt"></i>
+                                        <span>Logout</span>
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    {% else %}
+                        <a href="{% url 'login' %}" class="px-4 py-2 rounded-lg text-gray-700 hover:bg-gray-50 transition-all duration-200">
+                            <i class="fas fa-sign-in-alt mr-2"></i>Login
+                        </a>
+                        <a href="{% url 'signup' %}" class="bg-gradient-to-r from-primary to-secondary text-white px-4 py-2 rounded-lg hover:opacity-90 transition-all duration-200 shadow-lg shadow-primary/20">
+                            <i class="fas fa-user-plus mr-2"></i>Sign Up
+                        </a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Messages -->
+    {% if messages %}
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-4">
+            {% for message in messages %}
+                <div x-data="{ show: true }" x-show="show" x-transition class="p-4 rounded-lg shadow-lg {% if message.tags == 'success' %}bg-green-50 border border-green-200 text-green-700{% elif message.tags == 'error' %}bg-red-50 border border-red-200 text-red-700{% else %}bg-blue-50 border border-blue-200 text-blue-700{% endif %} flex justify-between items-center">
+                    <div class="flex items-center">
+                        <i class="fas fa-{% if message.tags == 'success' %}check-circle{% elif message.tags == 'error' %}exclamation-circle{% else %}info-circle{% endif %} mr-3"></i>
+                        {{ message }}
+                    </div>
+                    <button @click="show = false" class="text-gray-400 hover:text-gray-600">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    <!-- Main Content -->
+    <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- Footer -->
+    <footer class="glass-effect border-t border-gray-200 mt-auto">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div>
+                    <div class="flex items-center space-x-2">
+                        <i class="fas fa-leaf text-2xl text-primary"></i>
+                        <h3 class="text-xl font-bold bg-gradient-to-r from-primary to-secondary text-transparent bg-clip-text">FoodAI</h3>
+                    </div>
+                    <p class="text-gray-600 mt-2">Analyze your food with the power of AI</p>
+                </div>
+                <div class="space-y-4">
+                    <h4 class="font-semibold text-gray-900">Quick Links</h4>
+                    <div class="flex flex-col space-y-2">
+                        <a href="{% url 'about' %}" class="text-gray-600 hover:text-primary transition-colors">About Us</a>
+                        <a href="#" class="text-gray-600 hover:text-primary transition-colors">Privacy Policy</a>
+                        <a href="#" class="text-gray-600 hover:text-primary transition-colors">Terms of Service</a>
+                    </div>
+                </div>
+                <div class="space-y-4">
+                    <h4 class="font-semibold text-gray-900">Connect With Us</h4>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-600 hover:text-primary transition-colors"><i class="fab fa-twitter text-xl"></i></a>
+                        <a href="#" class="text-gray-600 hover:text-primary transition-colors"><i class="fab fa-facebook text-xl"></i></a>
+                        <a href="#" class="text-gray-600 hover:text-primary transition-colors"><i class="fab fa-instagram text-xl"></i></a>
+                        <a href="#" class="text-gray-600 hover:text-primary transition-colors"><i class="fab fa-github text-xl"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-8 pt-8 border-t border-gray-200 text-center text-gray-500">
+                <p>&copy; {% now "Y" %} FoodAI. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Alpine.js -->
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    
+    <!-- Custom Scripts -->
+    {% block extra_js %}{% endblock %}
+</body>
+</html>
