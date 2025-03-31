@@ -1,0 +1,40 @@
+ 
+<!-- {% include 'components/button.html' with 
+    href="url_name" 
+    icon="fa-icon-name"
+    text="Button Text"
+    size="sm|md|lg"
+    variant="primary|secondary|outline"
+    class="additional-classes"
+%} -->
+
+<a href="{% url href %}"
+   class="group relative inline-flex items-center space-x-2 
+          {% if variant == 'outline' %}
+              border-2 border-primary hover:bg-primary hover:text-white text-primary
+          {% else %}
+              bg-gradient-to-r from-primary to-secondary text-white hover:opacity-90
+          {% endif %}
+          {% if size == 'sm' %}
+              px-4 py-2 text-sm
+          {% elif size == 'lg' %}
+              px-8 py-4 text-lg
+          {% else %}
+              px-6 py-3 text-base
+          {% endif %}
+          rounded-xl transition-all duration-200 shadow-lg shadow-primary/20
+          {{ class|default:'' }}">
+    
+    {% if variant != 'outline' %}
+        <span class="absolute inset-0 bg-white/20 rounded-xl opacity-0 
+                     group-hover:opacity-100 transition-opacity"></span>
+    {% endif %}
+    
+    {% if icon %}
+        <i class="fas {{ icon }} group-hover:scale-110 transition-transform"></i>
+    {% endif %}
+    
+    {% if text %}
+        <span>{{ text }}</span>
+    {% endif %}
+</a>

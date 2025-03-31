@@ -75,13 +75,9 @@
                 <h2 class="text-2xl font-bold text-gray-900">Food Recommendations</h2>
                 <p class="text-gray-600 mt-1">Personalized meal suggestions</p>
             </div>
-            <a href="{% url 'recommend' %}" 
-               class="inline-flex items-center space-x-2 bg-gradient-to-r from-primary to-secondary 
-                      text-white px-6 py-3 rounded-xl hover:opacity-90 transition-all duration-200 
-                      shadow-lg shadow-primary/20">
-                <i class="fas fa-magic"></i>
-                <span>Get Recommendations</span>
-            </a>
+            <!-- Recommendations Button -->
+            {% include 'components/button.html' with  href='recommend'  icon="fa-magic"  text="Get Recommendations" variant="primary" size="md" %}
+
         </div>
 
         {% if recommendations %}
