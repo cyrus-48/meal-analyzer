@@ -19,8 +19,7 @@
                         <span class="text-4xl font-bold">{{ profile.user.username|make_list|first|upper }}</span>
                     </div>
                 {% endif %}
-            </div>
-
+            </div> 
             <!-- Profile Info -->
             <div class="flex-grow text-center md:text-left">
                 <h1 class="text-4xl font-bold text-gray-900 mb-2">
@@ -120,13 +119,7 @@
                 <p class="text-gray-600 mb-8">
                     Get personalized meal suggestions based on your preferences
                 </p>
-                <a href="{% url 'recommend' %}" 
-                   class="inline-flex items-center space-x-2 bg-gradient-to-r from-primary to-secondary 
-                          text-white px-8 py-4 rounded-xl hover:opacity-90 transition-all duration-200 
-                          shadow-lg shadow-primary/20">
-                    <i class="fas fa-magic"></i>
-                    <span>Get Your First Recommendation</span>
-                </a>
+                {% include 'components/button.html' with  href='recommend'  icon="fa-magic"  text="First recommendation" variant="primary" size="md" %}
             </div>
         {% endif %}
     </div>
@@ -139,13 +132,8 @@
                 <p class="text-gray-600 mt-1">Discover {{ profile.user.username }}'s food journey</p>
             </div>
             {% if user == profile.user %}
-                <a href="{% url 'analysis-create' %}" 
-                   class="inline-flex items-center space-x-2 bg-gradient-to-r from-primary to-secondary 
-                          text-white px-6 py-3 rounded-xl hover:opacity-90 transition-all duration-200 
-                          shadow-lg shadow-primary/20">
-                    <i class="fas fa-plus"></i>
-                    <span>New Analysis</span>
-                </a>
+                <!-- Create Analysis Button -->
+                {% include 'components/button.html' with  href='analysis-create'  icon="fa-plus"  text="Analyze" variant="primary" size="md" %}
             {% endif %}
         </div>
 
@@ -169,13 +157,7 @@
                     {% endif %}
                 </p>
                 {% if user == profile.user %}
-                    <a href="{% url 'analysis-create' %}" 
-                       class="inline-flex items-center space-x-2 bg-gradient-to-r from-primary to-secondary 
-                              text-white px-8 py-4 rounded-xl hover:opacity-90 transition-all duration-200 
-                              shadow-lg shadow-primary/20">
-                        <i class="fas fa-plus"></i>
-                        <span>Analyze Your First Food</span>
-                    </a>
+                    {% include 'components/button.html' with  href='analysis-create'  icon="fa-magic"  text="First Analysis" variant="primary" size="md" %}
                 {% endif %}
             </div>
         {% endif %}
