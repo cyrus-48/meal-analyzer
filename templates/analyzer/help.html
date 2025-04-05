@@ -1,0 +1,892 @@
+{% extends 'base.html' %}
+
+{% block title %}FoodAI Help - How to Use the Platform{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<div class="relative bg-gradient-to-br from-primary/5 to-secondary/5">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+        <div class="text-center">
+            <h1 class="text-4xl md:text-5xl font-bold mb-6">
+                How to Use <span class="bg-gradient-to-r from-primary to-secondary text-transparent bg-clip-text">FoodAI</span>
+            </h1>
+            <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                Get the most out of our AI-powered food analysis platform with this step-by-step guide
+            </p>
+        </div>
+    </div>
+    
+    <!-- Animated Wave Divider -->
+    <div class="absolute bottom-0 left-0 w-full overflow-hidden leading-0 transform">
+        <svg class="relative block w-full h-24" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+            <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" class="fill-white"></path>
+        </svg>
+    </div>
+</div>
+
+<!-- Quick Links Jump Navigation -->
+<div class="bg-white sticky top-20 z-30 border-b border-gray-100 shadow-sm">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center justify-center space-x-2 md:space-x-8 py-4 overflow-x-auto scrollbar-hide text-sm md:text-base">
+            <a href="#getting-started" class="px-4 py-2 rounded-full bg-primary/10 text-primary hover:bg-primary/20 transition-colors">
+                Getting Started
+            </a>
+            <a href="#analyzing-food" class="px-4 py-2 rounded-full bg-gray-50 text-gray-700 hover:bg-primary/10 hover:text-primary transition-colors">
+                Analyzing Food
+            </a>
+            <a href="#recommendations" class="px-4 py-2 rounded-full bg-gray-50 text-gray-700 hover:bg-primary/10 hover:text-primary transition-colors">
+                Getting Recommendations
+            </a>
+            <a href="#sharing" class="px-4 py-2 rounded-full bg-gray-50 text-gray-700 hover:bg-primary/10 hover:text-primary transition-colors">
+                Sharing Results
+            </a>
+            <a href="#faq" class="px-4 py-2 rounded-full bg-gray-50 text-gray-700 hover:bg-primary/10 hover:text-primary transition-colors">
+                FAQ
+            </a>
+        </div>
+    </div>
+</div>
+
+<!-- Main Content -->
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <!-- Section 1: Getting Started -->
+    <section id="getting-started" class="mb-24 scroll-mt-32">
+        <div class="flex flex-col md:flex-row items-center gap-12 mb-16">
+            <div class="md:w-1/2">
+                <span class="inline-block px-3 py-1 rounded-full bg-primary/10 text-primary text-sm font-medium mb-6">Step 1</span>
+                <h2 class="text-3xl font-bold mb-6">Creating Your Account</h2>
+                <div class="space-y-4 text-gray-600">
+                    <p>Start by creating your FoodAI account to unlock all features of the platform:</p>
+                    <ul class="list-inside space-y-3">
+                        <li class="flex items-start">
+                            <div class="flex-shrink-0 h-6 w-6 rounded-full bg-green-100 flex items-center justify-center mr-3 mt-0.5">
+                                <i class="fas fa-check text-green-500 text-sm"></i>
+                            </div>
+                            <span>Click on <strong>Sign Up</strong> in the top navigation bar</span>
+                        </li>
+                        <li class="flex items-start">
+                            <div class="flex-shrink-0 h-6 w-6 rounded-full bg-green-100 flex items-center justify-center mr-3 mt-0.5">
+                                <i class="fas fa-check text-green-500 text-sm"></i>
+                            </div>
+                            <span>Enter your details and create a secure password</span>
+                        </li>
+                        <li class="flex items-start">
+                            <div class="flex-shrink-0 h-6 w-6 rounded-full bg-green-100 flex items-center justify-center mr-3 mt-0.5">
+                                <i class="fas fa-check text-green-500 text-sm"></i>
+                            </div>
+                            <span>Complete your profile to personalize your experience</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="md:w-1/2 relative">
+                <!-- Animated Illustration -->
+                <div class="bg-white p-4 rounded-xl shadow-xl border border-gray-100 overflow-hidden">
+                    <div class="aspect-video bg-gray-50 rounded-lg overflow-hidden relative">
+                        <div class="signup-animation absolute inset-0">
+                            <!-- Animation frames will be controlled by CSS -->
+                            <div class="frame frame-1 absolute inset-0 flex flex-col items-center justify-center opacity-100">
+                                <div class="w-3/4 h-10 bg-gray-200 rounded-lg mb-3 animate-pulse"></div>
+                                <div class="w-3/4 h-10 bg-gray-200 rounded-lg mb-3 animate-pulse" style="animation-delay: 0.2s"></div>
+                                <div class="w-3/4 h-10 bg-gray-200 rounded-lg mb-6 animate-pulse" style="animation-delay: 0.4s"></div>
+                                <div class="w-1/2 h-12 rounded-lg bg-gradient-to-r from-primary to-secondary animate-pulse" style="animation-delay: 0.6s"></div>
+                            </div>
+                            <div class="frame frame-2 absolute inset-0 flex items-center justify-center opacity-0">
+                                <div class="w-32 h-32 rounded-full bg-green-100 flex items-center justify-center">
+                                    <i class="fas fa-check text-5xl text-green-500"></i>
+                                </div>
+                            </div>
+                            <div class="frame frame-3 absolute inset-0 flex items-center justify-center opacity-0">
+                                <div class="w-3/4 flex flex-col items-center">
+                                    <div class="w-24 h-24 rounded-full bg-primary/20 mb-4 flex items-center justify-center">
+                                        <i class="fas fa-user text-3xl text-primary"></i>
+                                    </div>
+                                    <div class="w-full h-8 bg-gray-200 rounded-lg mb-3"></div>
+                                    <div class="w-full h-24 bg-gray-200 rounded-lg"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex justify-center mt-4">
+                        <div class="inline-flex rounded-md">
+                            <button class="animation-control px-3 py-1 rounded-l-md bg-primary text-white" data-animation="signup" data-frame="1">1</button>
+                            <button class="animation-control px-3 py-1 border-x border-white bg-gray-200" data-animation="signup" data-frame="2">2</button>
+                            <button class="animation-control px-3 py-1 rounded-r-md bg-gray-200" data-animation="signup" data-frame="3">3</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="absolute -bottom-6 -right-6 w-24 h-24 bg-gradient-to-br from-primary to-secondary rounded-full opacity-20 blur-2xl"></div>
+            </div>
+        </div>
+        
+        <div class="flex flex-col md:flex-row-reverse items-center gap-12">
+            <div class="md:w-1/2">
+                <span class="inline-block px-3 py-1 rounded-full bg-primary/10 text-primary text-sm font-medium mb-6">Step 2</span>
+                <h2 class="text-3xl font-bold mb-6">Navigating the Dashboard</h2>
+                <div class="space-y-4 text-gray-600">
+                    <p>Your dashboard is your command center for all FoodAI features:</p>
+                    <ul class="list-inside space-y-3">
+                        <li class="flex items-start">
+                            <div class="flex-shrink-0 h-6 w-6 rounded-full bg-primary/20 flex items-center justify-center mr-3 mt-0.5">
+                                <span class="text-sm font-bold text-primary">1</span>
+                            </div>
+                            <span>View your <strong>Recent Analyses</strong> for quick access</span>
+                        </li>
+                        <li class="flex items-start">
+                            <div class="flex-shrink-0 h-6 w-6 rounded-full bg-primary/20 flex items-center justify-center mr-3 mt-0.5">
+                                <span class="text-sm font-bold text-primary">2</span>
+                            </div>
+                            <span>Check <strong>Trending Topics</strong> to see what's popular</span>
+                        </li>
+                        <li class="flex items-start">
+                            <div class="flex-shrink-0 h-6 w-6 rounded-full bg-primary/20 flex items-center justify-center mr-3 mt-0.5">
+                                <span class="text-sm font-bold text-primary">3</span>
+                            </div>
+                            <span>Access <strong>Quick Links</strong> to main features</span>
+                        </li>
+                        <li class="flex items-start">
+                            <div class="flex-shrink-0 h-6 w-6 rounded-full bg-primary/20 flex items-center justify-center mr-3 mt-0.5">
+                                <span class="text-sm font-bold text-primary">4</span>
+                            </div>
+                            <span>View your <strong>Stats</strong> to track your activity</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="md:w-1/2 relative">
+                <!-- Dashboard Animation -->
+                <div class="bg-white p-4 rounded-xl shadow-xl border border-gray-100">
+                    <div class="aspect-video bg-gray-50 rounded-lg overflow-hidden relative">
+                        <div class="dashboard-animation absolute inset-0 p-4">
+                            <!-- Dashboard mockup with animated elements -->
+                            <div class="flex items-center justify-between mb-4">
+                                <div class="w-32 h-8 bg-gradient-to-r from-primary to-secondary rounded-lg"></div>
+                                <div class="w-10 h-10 rounded-full bg-gray-200"></div>
+                            </div>
+                            <div class="grid grid-cols-3 gap-3 mb-4">
+                                <div class="bg-gray-200 h-16 rounded-lg pulse-animation" style="animation-delay: 0s"></div>
+                                <div class="bg-gray-200 h-16 rounded-lg pulse-animation" style="animation-delay: 0.2s"></div>
+                                <div class="bg-gray-200 h-16 rounded-lg pulse-animation" style="animation-delay: 0.4s"></div>
+                            </div>
+                            <div class="w-full h-32 bg-gray-200 rounded-lg mb-4 pulse-animation" style="animation-delay: 0.6s"></div>
+                            <div class="grid grid-cols-2 gap-3">
+                                <div class="bg-gray-200 h-24 rounded-lg pulse-animation" style="animation-delay: 0.8s"></div>
+                                <div class="bg-gray-200 h-24 rounded-lg pulse-animation" style="animation-delay: 1s"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="absolute -bottom-6 -left-6 w-24 h-24 bg-gradient-to-br from-secondary to-primary rounded-full opacity-20 blur-2xl"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 2: Analyzing Food -->
+    <section id="analyzing-food" class="mb-24 scroll-mt-32">
+        <div class="text-center mb-16">
+            <span class="inline-block px-3 py-1 rounded-full bg-primary/10 text-primary text-sm font-medium mb-4">Food Analysis</span>
+            <h2 class="text-4xl font-bold mb-4">How to Analyze Your Food</h2>
+            <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                Get detailed nutritional insights from your food photos in just a few steps
+            </p>
+        </div>
+        
+        <div class="grid md:grid-cols-3 gap-8 mb-16">
+            <div class="bg-white rounded-2xl p-8 shadow-lg border border-gray-100">
+                <div class="w-16 h-16 rounded-xl bg-primary/10 flex items-center justify-center mb-6 text-primary">
+                    <i class="fas fa-camera text-2xl"></i>
+                </div>
+                <h3 class="text-xl font-bold mb-4">Upload a Photo</h3>
+                <p class="text-gray-600 leading-relaxed">
+                    Take a clear photo of your meal or upload an existing image from your device.
+                </p>
+                <div class="mt-6 p-4 bg-gray-50 rounded-xl">
+                    <div class="text-sm font-medium text-gray-700">Pro Tip</div>
+                    <p class="text-sm text-gray-600">
+                        For best results, ensure good lighting and make sure all food items are visible in the frame.
+                    </p>
+                </div>
+            </div>
+            
+            <div class="bg-white rounded-2xl p-8 shadow-lg border border-gray-100">
+                <div class="w-16 h-16 rounded-xl bg-secondary/10 flex items-center justify-center mb-6 text-secondary">
+                    <i class="fas fa-magic text-2xl"></i>
+                </div>
+                <h3 class="text-xl font-bold mb-4">AI Processing</h3>
+                <p class="text-gray-600 leading-relaxed">
+                    Our AI analyzes the image to identify ingredients and calculate nutritional information.
+                </p>
+                <div class="mt-6 p-4 bg-gray-50 rounded-xl">
+                    <div class="text-sm font-medium text-gray-700">Wait Time</div>
+                    <p class="text-sm text-gray-600">
+                        Analysis typically takes 5-15 seconds depending on image complexity.
+                    </p>
+                </div>
+            </div>
+            
+            <div class="bg-white rounded-2xl p-8 shadow-lg border border-gray-100">
+                <div class="w-16 h-16 rounded-xl bg-green-500/10 flex items-center justify-center mb-6 text-green-500">
+                    <i class="fas fa-chart-pie text-2xl"></i>
+                </div>
+                <h3 class="text-xl font-bold mb-4">View Results</h3>
+                <p class="text-gray-600 leading-relaxed">
+                    See detailed breakdown of calories, nutrients, and ingredients in your food.
+                </p>
+                <div class="mt-6 p-4 bg-gray-50 rounded-xl">
+                    <div class="text-sm font-medium text-gray-700">Customization</div>
+                    <p class="text-sm text-gray-600">
+                        You can add title and notes to your analysis for better organization.
+                    </p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Interactive Animation for Analysis Process -->
+        <div class="bg-white rounded-2xl shadow-xl border border-gray-100 p-8 overflow-hidden relative">
+            <div class="absolute top-0 right-0 bg-gradient-to-bl from-primary/5 to-transparent w-full h-full"></div>
+            
+            <h3 class="text-2xl font-bold mb-8 text-center relative z-10">See the Analysis Process</h3>
+            
+            <div class="relative h-96 rounded-xl overflow-hidden">
+                <div class="food-analysis-demo absolute inset-0 flex transition-transform duration-700">
+                    <!-- Step 1: Upload Photo -->
+                    <div class="flex-shrink-0 w-full h-full p-4 flex flex-col items-center justify-center">
+                        <div class="upload-animation mx-auto mb-8 w-full max-w-lg">
+                            <div class="relative border-2 border-dashed border-gray-300 rounded-xl bg-gray-50 p-8 flex flex-col items-center">
+                                <div class="w-20 h-20 text-primary">
+                                    <i class="fas fa-cloud-upload-alt text-5xl animate-bounce"></i>
+                                </div>
+                                <div class="mt-4 text-gray-700 font-medium">Upload your food photo</div>
+                                <div class="mt-2 text-sm text-gray-500">or drag and drop here</div>
+                                <div class="mt-6 w-full max-w-xs bg-gradient-to-r from-primary to-secondary text-white py-3 rounded-lg text-center">
+                                    Choose File
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Step 2: Processing -->
+                    <div class="flex-shrink-0 w-full h-full p-4 flex flex-col items-center justify-center">
+                        <div class="processing-animation">
+                            <div class="w-24 h-24 relative mx-auto mb-8">
+                                <div class="absolute inset-0 rounded-full border-4 border-t-primary border-gray-200 animate-spin"></div>
+                                <div class="absolute inset-0 flex items-center justify-center">
+                                    <i class="fas fa-robot text-primary text-2xl"></i>
+                                </div>
+                            </div>
+                            <div class="text-center mb-4">
+                                <h3 class="text-lg font-semibold text-gray-800 mb-2">Analyzing your food...</h3>
+                                <div class="text-sm text-gray-600 mb-6">Please wait while our AI analyzes your image</div>
+                                <div class="h-2 w-64 mx-auto bg-gray-200 rounded-full overflow-hidden">
+                                    <div class="h-full bg-gradient-to-r from-primary to-secondary animate-progress"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Step 3: Results -->
+                    <div class="flex-shrink-0 w-full h-full p-4">
+                        <div class="results-animation h-full grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div class="bg-gray-50 rounded-xl overflow-hidden">
+                                <div class="relative aspect-video bg-gray-300">
+                                    <!-- Placeholder for food image -->
+                                    <div class="absolute bottom-2 left-2 bg-black/60 text-white px-3 py-1 rounded-lg text-sm flex items-center">
+                                        <i class="fas fa-fire-alt text-orange-400 mr-1"></i>
+                                        <span>450 calories</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="flex flex-col space-y-4">
+                                <div class="bg-gray-50 rounded-xl p-4">
+                                    <div class="flex items-center space-x-3 mb-3">
+                                        <div class="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center">
+                                            <i class="fas fa-leaf text-primary"></i>
+                                        </div>
+                                        <h4 class="font-semibold">Ingredients</h4>
+                                    </div>
+                                    <div class="flex flex-wrap gap-2">
+                                        <span class="px-3 py-1 bg-gray-200 rounded-full text-sm">Chicken</span>
+                                        <span class="px-3 py-1 bg-gray-200 rounded-full text-sm">Rice</span>
+                                        <span class="px-3 py-1 bg-gray-200 rounded-full text-sm">Broccoli</span>
+                                        <span class="px-3 py-1 bg-gray-200 rounded-full text-sm">Olive oil</span>
+                                    </div>
+                                </div>
+                                
+                                <div class="bg-gray-50 rounded-xl p-4">
+                                    <div class="flex items-center space-x-3 mb-3">
+                                        <div class="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center">
+                                            <i class="fas fa-chart-pie text-primary"></i>
+                                        </div>
+                                        <h4 class="font-semibold">Nutrients</h4>
+                                    </div>
+                                    <div class="grid grid-cols-3 gap-2">
+                                        <div class="bg-white p-2 rounded-lg">
+                                            <div class="text-xs text-gray-500">Protein</div>
+                                            <div class="font-bold">30g</div>
+                                        </div>
+                                        <div class="bg-white p-2 rounded-lg">
+                                            <div class="text-xs text-gray-500">Carbs</div>
+                                            <div class="font-bold">45g</div>
+                                        </div>
+                                        <div class="bg-white p-2 rounded-lg">
+                                            <div class="text-xs text-gray-500">Fats</div>
+                                            <div class="font-bold">15g</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Progress Indicators -->
+                <div class="absolute bottom-4 left-0 right-0 flex justify-center z-10">
+                    <div class="flex items-center space-x-1">
+                        <button class="analysis-step-btn w-10 h-1.5 rounded-full bg-primary transition-all" data-step="1"></button>
+                        <button class="analysis-step-btn w-4 h-1.5 rounded-full bg-gray-300 transition-all" data-step="2"></button>
+                        <button class="analysis-step-btn w-4 h-1.5 rounded-full bg-gray-300 transition-all" data-step="3"></button>
+                    </div>
+                </div>
+                
+                <!-- Controls -->
+                <div class="absolute bottom-4 right-4 z-10">
+                    <button id="prevAnalysisStep" class="w-10 h-10 rounded-full bg-white border border-gray-200 flex items-center justify-center text-gray-700 hover:bg-gray-50 mr-2">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <button id="nextAnalysisStep" class="w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center hover:bg-primary/90">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 3: Getting Recommendations -->
+    <section id="recommendations" class="mb-24 scroll-mt-32">
+        <div class="flex flex-col md:flex-row items-center gap-12 mb-16">
+            <div class="md:w-1/2">
+                <span class="inline-block px-3 py-1 rounded-full bg-primary/10 text-primary text-sm font-medium mb-6">Personalized Recommendations</span>
+                <h2 class="text-3xl font-bold mb-6">Get Meal Suggestions</h2>
+                <div class="space-y-4 text-gray-600">
+                    <p>FoodAI can suggest meals based on your preferences and nutritional needs:</p>
+                    <ul class="list-inside space-y-3">
+                        <li class="flex items-start">
+                            <div class="flex-shrink-0 h-6 w-6 rounded-full bg-primary/20 flex items-center justify-center mr-3 mt-0.5">
+                                <span class="text-sm font-bold text-primary">1</span>
+                            </div>
+                            <span>Navigate to the <strong>Recommendations</strong> page</span>
+                        </li>
+                        <li class="flex items-start">
+                            <div class="flex-shrink-0 h-6 w-6 rounded-full bg-primary/20 flex items-center justify-center mr-3 mt-0.5">
+                                <span class="text-sm font-bold text-primary">2</span>
+                            </div>
+                            <span>Fill in your dietary preferences and restrictions</span>
+                        </li>
+                        <li class="flex items-start">
+                            <div class="flex-shrink-0 h-6 w-6 rounded-full bg-primary/20 flex items-center justify-center mr-3 mt-0.5">
+                                <span class="text-sm font-bold text-primary">3</span>
+                            </div>
+                            <span>Specify any cultural preferences and family size</span>
+                        </li>
+                        <li class="flex items-start">
+                            <div class="flex-shrink-0 h-6 w-6 rounded-full bg-primary/20 flex items-center justify-center mr-3 mt-0.5">
+                                <span class="text-sm font-bold text-primary">4</span>
+                            </div>
+                            <span>Click "Generate Recommendations" and get personalized meal ideas</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="md:w-1/2 relative">
+                <!-- Recommendation Animation -->
+                <div class="bg-white p-4 rounded-xl shadow-xl border border-gray-100 overflow-hidden">
+                    <div class="aspect-video bg-gray-50 rounded-lg overflow-hidden relative">
+                        <div class="recommend-animation absolute inset-0 p-4 grid grid-cols-2 gap-4">
+                            <div class="p-4 rounded-xl bg-white shadow-sm border border-gray-100 transform hover:scale-[1.02] transition-transform">
+                                <div class="flex items-center space-x-3 mb-3">
+                                    <div class="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center text-primary">
+                                        <i class="fas fa-utensils"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-medium">Mediterranean Bowl</h4>
+                                        <p class="text-xs text-gray-500">Lunch • 450 cal</p>
+                                    </div>
+                                </div>
+                                <div class="w-full h-24 bg-gray-200 rounded-lg mb-3"></div>
+                                <div class="flex justify-between items-center">
+                                    <div class="text-xs text-primary">View Recipe</div>
+                                    <div class="text-xs text-gray-500">15 min</div>
+                                </div>
+                            </div>
+                            <div class="p-4 rounded-xl bg-white shadow-sm border border-gray-100 transform hover:scale-[1.02] transition-transform">
+                                <div class="flex items-center space-x-3 mb-3">
+                                    <div class="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center text-primary">
+                                        <i class="fas fa-utensils"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-medium">Protein Salad</h4>
+                                        <p class="text-xs text-gray-500">Dinner • 380 cal</p>
+                                    </div>
+                                </div>
+                                <div class="w-full h-24 bg-gray-200 rounded-lg mb-3"></div>
+                                <div class="flex justify-between items-center">
+                                    <div class="text-xs text-primary">View Recipe</div>
+                                    <div class="text-xs text-gray-500">10 min</div>
+                                </div>
+                            </div>
+                            <div class="p-4 rounded-xl bg-white shadow-sm border border-gray-100 transform hover:scale-[1.02] transition-transform">
+                                <div class="flex items-center space-x-3 mb-3">
+                                    <div class="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center text-primary">
+                                        <i class="fas fa-utensils"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-medium">Energy Smoothie</h4>
+                                        <p class="text-xs text-gray-500">Breakfast • 290 cal</p>
+                                    </div>
+                                </div>
+                                <div class="w-full h-24 bg-gray-200 rounded-lg mb-3"></div>
+                                <div class="flex justify-between items-center">
+                                    <div class="text-xs text-primary">View Recipe</div>
+                                    <div class="text-xs text-gray-500">5 min</div>
+                                </div>
+                            </div>
+                            <div class="p-4 rounded-xl bg-white shadow-sm border border-gray-100 transform hover:scale-[1.02] transition-transform">
+                                <div class="flex items-center space-x-3 mb-3">
+                                    <div class="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center text-primary">
+                                        <i class="fas fa-utensils"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-medium">Veggie Wrap</h4>
+                                        <p class="text-xs text-gray-500">Lunch • 320 cal</p>
+                                    </div>
+                                </div>
+                                <div class="w-full h-24 bg-gray-200 rounded-lg mb-3"></div>
+                                <div class="flex justify-between items-center">
+                                    <div class="text-xs text-primary">View Recipe</div>
+                                    <div class="text-xs text-gray-500">12 min</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="absolute -bottom-6 -left-6 w-24 h-24 bg-gradient-to-br from-secondary to-primary rounded-full opacity-20 blur-2xl"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 4: Sharing Results -->
+    <section id="sharing" class="mb-24 scroll-mt-32">
+        <div class="flex flex-col md:flex-row-reverse items-center gap-12">
+            <div class="md:w-1/2">
+                <span class="inline-block px-3 py-1 rounded-full bg-primary/10 text-primary text-sm font-medium mb-6">Community Features</span>
+                <h2 class="text-3xl font-bold mb-6">Sharing Your Results</h2>
+                <div class="space-y-4 text-gray-600">
+                    <p>Share your food analyses with the FoodAI community:</p>
+                    <ul class="list-inside space-y-3">
+                        <li class="flex items-start">
+                            <div class="flex-shrink-0 h-6 w-6 rounded-full bg-primary/20 flex items-center justify-center mr-3 mt-0.5">
+                                <span class="text-sm font-bold text-primary">1</span>
+                            </div>
+                            <span>Visit your analysis page and set privacy to "Public"</span>
+                        </li>
+                        <li class="flex items-start">
+                            <div class="flex-shrink-0 h-6 w-6 rounded-full bg-primary/20 flex items-center justify-center mr-3 mt-0.5">
+                                <span class="text-sm font-bold text-primary">2</span>
+                            </div>
+                            <span>Your analysis will appear in the Explore section</span>
+                        </li>
+                        <li class="flex items-start">
+                            <div class="flex-shrink-0 h-6 w-6 rounded-full bg-primary/20 flex items-center justify-center mr-3 mt-0.5">
+                                <span class="text-sm font-bold text-primary">3</span>
+                            </div>
+                            <span>Others can like and comment on your analysis</span>
+                        </li>
+                        <li class="flex items-start">
+                            <div class="flex-shrink-0 h-6 w-6 rounded-full bg-primary/20 flex items-center justify-center mr-3 mt-0.5">
+                                <span class="text-sm font-bold text-primary">4</span>
+                            </div>
+                            <span>Private analyses remain visible only to you</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="md:w-1/2 relative">
+                <!-- Sharing Animation -->
+                <div class="bg-white p-4 rounded-xl shadow-xl border border-gray-100 overflow-hidden">
+                    <div class="aspect-video bg-gray-50 rounded-lg overflow-hidden relative">
+                        <div class="sharing-animation absolute inset-0 p-4">
+                            <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-4">
+                                <div class="flex items-center justify-between mb-4">
+                                    <div class="flex items-center space-x-3">
+                                        <div class="w-10 h-10 rounded-full bg-gray-200"></div>
+                                        <div>
+                                            <div class="font-medium">Username</div>
+                                            <div class="text-xs text-gray-500">2 minutes ago</div>
+                                        </div>
+                                    </div>
+                                    <div class="privacy-toggle flex items-center space-x-1 px-3 py-1 rounded-full border-2 border-green-500 text-green-500">
+                                        <i class="fas fa-globe"></i>
+                                        <span class="text-sm">Public</span>
+                                    </div>
+                                </div>
+                                <div class="w-full aspect-video bg-gray-200 rounded-lg mb-4"></div>
+                                <div class="flex justify-between items-center">
+                                    <div class="flex items-center space-x-1 text-red-500">
+                                        <i class="fas fa-heart"></i>
+                                        <span class="like-count transition-all">5</span>
+                                    </div>
+                                    <div class="flex items-center space-x-1 text-gray-500">
+                                        <i class="fas fa-comment"></i>
+                                        <span>3</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="absolute -bottom-6 -right-6 w-24 h-24 bg-gradient-to-br from-primary to-secondary rounded-full opacity-20 blur-2xl"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 5: FAQ -->
+    <section id="faq" class="scroll-mt-32">
+        <div class="text-center mb-16">
+            <span class="inline-block px-3 py-1 rounded-full bg-primary/10 text-primary text-sm font-medium mb-4">Help & Support</span>
+            <h2 class="text-4xl font-bold mb-4">Frequently Asked Questions</h2>
+            <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                Find answers to common questions about using FoodAI
+            </p>
+        </div>
+        
+        <div class="max-w-3xl mx-auto">
+            <div class="space-y-4" x-data="{selected:null}">
+                <!-- FAQ Item 1 -->
+                <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden" x-data="{id: 1}" :class="{'shadow-md': selected == id}">
+                    <button @click="selected = selected == id ? null : id" class="w-full flex items-center justify-between p-6">
+                        <span class="font-medium text-lg text-left">How accurate is the AI analysis?</span>
+                        <i class="fas" :class="{'fa-chevron-down': selected != id, 'fa-chevron-up': selected == id}"></i>
+                    </button>
+                    <div x-show="selected == id" x-collapse class="px-6 pb-6">
+                        <p class="text-gray-600">
+                            FoodAI typically achieves 85-95% accuracy in identifying common food items and calculating nutritional information. The accuracy depends on image quality, lighting conditions, and whether the food is commonly recognized in our database. For best results, take clear, well-lit photos with all food items visible.
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- FAQ Item 2 -->
+                <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden" x-data="{id: 2}" :class="{'shadow-md': selected == id}">
+                    <button @click="selected = selected == id ? null : id" class="w-full flex items-center justify-between p-6">
+                        <span class="font-medium text-lg text-left">Can I track my food consumption over time?</span>
+                        <i class="fas" :class="{'fa-chevron-down': selected != id, 'fa-chevron-up': selected == id}"></i>
+                    </button>
+                    <div x-show="selected == id" x-collapse class="px-6 pb-6">
+                        <p class="text-gray-600">
+                            Yes! FoodAI allows you to save all your analyses to your profile. You can access your history from your profile page, where you'll find statistics and trends of your eating habits over time. This feature helps you make more informed decisions about your nutrition.
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- FAQ Item 3 -->
+                <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden" x-data="{id: 3}" :class="{'shadow-md': selected == id}">
+                    <button @click="selected = selected == id ? null : id" class="w-full flex items-center justify-between p-6">
+                        <span class="font-medium text-lg text-left">How do I set dietary preferences for recommendations?</span>
+                        <i class="fas" :class="{'fa-chevron-down': selected != id, 'fa-chevron-up': selected == id}"></i>
+                    </button>
+                    <div x-show="selected == id" x-collapse class="px-6 pb-6">
+                        <p class="text-gray-600">
+                            You can set your dietary preferences in two places: in your profile settings for platform-wide preferences, and on the recommendation page for specific meal suggestions. These include options like vegetarian, vegan, gluten-free, low-carb, and many others. You can update these preferences at any time.
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- FAQ Item 4 -->
+                <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden" x-data="{id: 4}" :class="{'shadow-md': selected == id}">
+                    <button @click="selected = selected == id ? null : id" class="w-full flex items-center justify-between p-6">
+                        <span class="font-medium text-lg text-left">Is my private data shared with others?</span>
+                        <i class="fas" :class="{'fa-chevron-down': selected != id, 'fa-chevron-up': selected == id}"></i>
+                    </button>
+                    <div x-show="selected == id" x-collapse class="px-6 pb-6">
+                        <p class="text-gray-600">
+                            We take privacy very seriously. Only analyses you explicitly mark as "Public" will be visible to other users. Your personal profile information, private analyses, and dietary preferences are never shared without your permission. You have full control over what others can see.
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- FAQ Item 5 -->
+                <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden" x-data="{id: 5}" :class="{'shadow-md': selected == id}">
+                    <button @click="selected = selected == id ? null : id" class="w-full flex items-center justify-between p-6">
+                        <span class="font-medium text-lg text-left">How do I contact support for additional help?</span>
+                        <i class="fas" :class="{'fa-chevron-down': selected != id, 'fa-chevron-up': selected == id}"></i>
+                    </button>
+                    <div x-show="selected == id" x-collapse class="px-6 pb-6">
+                        <p class="text-gray-600">
+                            For additional support, you can contact our team at support@foodai.com. We also have a community forum where you can ask questions and share tips with other users. For urgent issues, use the Help button in the bottom right corner of any page to access live chat support.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Help CTA -->
+    <div class="bg-gradient-to-r from-primary to-secondary text-white rounded-2xl shadow-xl mt-24 p-8 lg:p-12 text-center">
+        <h2 class="text-3xl font-bold mb-4">Still Need Help?</h2>
+        <p class="text-white/80 text-lg mb-8 max-w-2xl mx-auto">
+            Our support team is always ready to assist you with any questions you might have about using FoodAI
+        </p>
+        <div class="flex flex-wrap justify-center gap-4">
+            <a href="mailto:support@foodai.com" 
+               class="inline-flex items-center space-x-2 px-6 py-3 bg-white/20 hover:bg-white/30 transition-colors rounded-xl backdrop-blur-sm">
+                <i class="fas fa-envelope"></i>
+                <span>Contact Support</span>
+            </a>
+            <a href="#" 
+               class="inline-flex items-center space-x-2 px-6 py-3 bg-white text-primary hover:bg-white/90 transition-colors rounded-xl">
+                <i class="fas fa-book"></i>
+                <span>Documentation</span>
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Signup animation controls
+    document.querySelectorAll('.animation-control').forEach(button => {
+        button.addEventListener('click', function() {
+            const animation = this.dataset.animation;
+            const frame = parseInt(this.dataset.frame);
+            
+            // Update button states
+            document.querySelectorAll(`[data-animation="${animation}"]`).forEach(btn => {
+                btn.classList.remove('bg-primary', 'text-white');
+                btn.classList.add('bg-gray-200');
+            });
+            this.classList.add('bg-primary', 'text-white');
+            this.classList.remove('bg-gray-200');
+            
+            // Show the correct frame
+            document.querySelectorAll(`.${animation}-animation .frame`).forEach((frameEl, index) => {
+                frameEl.style.opacity = index + 1 === frame ? '1' : '0';
+                frameEl.style.zIndex = index + 1 === frame ? '10' : '0';
+            });
+        });
+    });
+    
+    // Auto-play signup animation
+    let currentSignupFrame = 1;
+    const signupAnimationInterval = setInterval(() => {
+        currentSignupFrame = currentSignupFrame >= 3 ? 1 : currentSignupFrame + 1;
+        document.querySelector(`.animation-control[data-animation="signup"][data-frame="${currentSignupFrame}"]`).click();
+    }, 3000);
+
+    // Food Analysis Demo Steps
+    let currentAnalysisStep = 1;
+    const totalAnalysisSteps = 3;
+    const demoElement = document.querySelector('.food-analysis-demo');
+    
+    // Analysis navigation controls
+    document.getElementById('nextAnalysisStep').addEventListener('click', () => {
+        if (currentAnalysisStep < totalAnalysisSteps) {
+            currentAnalysisStep++;
+            updateAnalysisStep();
+        }
+    });
+    
+    document.getElementById('prevAnalysisStep').addEventListener('click', () => {
+        if (currentAnalysisStep > 1) {
+            currentAnalysisStep--;
+            updateAnalysisStep();
+        }
+    });
+    
+    // Step indicator buttons
+    document.querySelectorAll('.analysis-step-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+            currentAnalysisStep = parseInt(this.dataset.step);
+            updateAnalysisStep();
+        });
+    });
+    
+    function updateAnalysisStep() {
+        // Update transform to show current step
+        demoElement.style.transform = `translateX(-${(currentAnalysisStep - 1) * 100}%)`;
+        
+        // Update step indicators
+        document.querySelectorAll('.analysis-step-btn').forEach((btn, index) => {
+            const step = parseInt(btn.dataset.step);
+            if (step === currentAnalysisStep) {
+                btn.classList.add('bg-primary', 'w-10');
+                btn.classList.remove('bg-gray-300', 'w-4');
+            } else {
+                btn.classList.remove('bg-primary', 'w-10');
+                btn.classList.add('bg-gray-300', 'w-4');
+            }
+        });
+    }
+    
+    // Auto-advance analysis demo
+    const analysisInterval = setInterval(() => {
+        currentAnalysisStep = currentAnalysisStep >= totalAnalysisSteps ? 1 : currentAnalysisStep + 1;
+        updateAnalysisStep();
+    }, 5000);
+    
+    // Privacy toggle animation
+    const privacyToggle = document.querySelector('.privacy-toggle');
+    let isPublic = true;
+    
+    setInterval(() => {
+        isPublic = !isPublic;
+        if (isPublic) {
+            privacyToggle.classList.remove('border-gray-500', 'text-gray-500');
+            privacyToggle.classList.add('border-green-500', 'text-green-500');
+            privacyToggle.innerHTML = '<i class="fas fa-globe"></i><span class="text-sm">Public</span>';
+        } else {
+            privacyToggle.classList.remove('border-green-500', 'text-green-500');
+            privacyToggle.classList.add('border-gray-500', 'text-gray-500');
+            privacyToggle.innerHTML = '<i class="fas fa-lock"></i><span class="text-sm">Private</span>';
+        }
+    }, 3000);
+    
+    // Like animation
+    const likeCount = document.querySelector('.like-count');
+    let liked = false;
+    
+    setInterval(() => {
+        liked = !liked;
+        if (liked) {
+            likeCount.textContent = '6';
+            likeCount.parentElement.classList.add('text-red-500');
+            likeCount.parentElement.classList.remove('text-gray-500');
+        } else {
+            likeCount.textContent = '5';
+            likeCount.parentElement.classList.remove('text-red-500');
+            likeCount.parentElement.classList.add('text-gray-500');
+        }
+    }, 3000);
+    
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                target.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+                
+                // Update active state in navigation
+                document.querySelectorAll('.sticky a').forEach(link => {
+                    link.classList.remove('bg-primary/10', 'text-primary');
+                    link.classList.add('bg-gray-50', 'text-gray-700');
+                });
+                this.classList.remove('bg-gray-50', 'text-gray-700');
+                this.classList.add('bg-primary/10', 'text-primary');
+            }
+        });
+    });
+    
+    // Intersection Observer for sections
+    const sections = document.querySelectorAll('section');
+    const navLinks = document.querySelectorAll('.sticky a');
+    
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const id = entry.target.getAttribute('id');
+                const navLink = document.querySelector(`.sticky a[href="#${id}"]`);
+                
+                if (navLink) {
+                    navLinks.forEach(link => {
+                        link.classList.remove('bg-primary/10', 'text-primary');
+                        link.classList.add('bg-gray-50', 'text-gray-700');
+                    });
+                    navLink.classList.remove('bg-gray-50', 'text-gray-700');
+                    navLink.classList.add('bg-primary/10', 'text-primary');
+                }
+            }
+        });
+    }, {
+        threshold: 0.4
+    });
+    
+    sections.forEach(section => {
+        observer.observe(section);
+    });
+    
+    // Cleanup intervals on page leave
+    window.addEventListener('beforeunload', () => {
+        clearInterval(signupAnimationInterval);
+        clearInterval(analysisInterval);
+    });
+});
+</script>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+/* Animation keyframes */
+@keyframes progress {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+}
+
+.animate-progress {
+    animation: progress 2s linear infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.7; }
+}
+
+.pulse-animation {
+    animation: pulse 2s ease-in-out infinite;
+}
+
+/* Scrollbar styling */
+.scrollbar-hide {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+    display: none;  /* Chrome, Safari and Opera */
+}
+
+/* Frames for animations */
+.frame {
+    transition: opacity 0.5s ease;
+}
+
+/* Food analysis demo */
+.food-analysis-demo {
+    overflow: hidden;
+    scroll-behavior: smooth;
+}
+
+/* Alpine.js transitions */
+[x-cloak] { display: none !important; }
+
+.collapse-enter-active,
+.collapse-leave-active {
+    transition: max-height 0.3s ease, opacity 0.3s ease;
+    overflow: hidden;
+}
+.collapse-enter-from,
+.collapse-leave-to {
+    max-height: 0;
+    opacity: 0;
+}
+</style>
+{% endblock %}

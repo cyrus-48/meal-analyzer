@@ -100,6 +100,10 @@
                         {% include 'components/navbar_link.html' with text='explore' url='explore' icon='fas fa-search' %}
                         {% include 'components/navbar_link.html' with text='recommendations' url='recommend' icon='fas fa-utensils' %}
                         {% include 'components/navbar_link.html' with text='about' url='about' icon='fas fa-info-circle' %}
+                        <a href="{% url 'help' %}" class="nav-link group flex items-center px-3 py-2 text-sm font-medium rounded-md">
+                            <i class="fas fa-question-circle mr-3 text-gray-400 group-hover:text-gray-500"></i>
+                            <span>Help</span>
+                        </a>
                     </div>
                 </div>
 
@@ -250,6 +254,52 @@
             </div>
         </div>
     </footer>
+
+    <!-- Help Button -->
+    <div class="fixed bottom-6 right-6 z-50">
+        <a href="{% url 'help' %}" 
+           class="help-button flex items-center justify-center w-14 h-14 rounded-full bg-gradient-to-r from-primary to-secondary text-white shadow-lg hover:scale-110 transition-transform duration-300">
+            <i class="fas fa-question text-xl"></i>
+        </a>
+    </div>
+
+    <style>
+        .help-button {
+            box-shadow: 0 10px 25px -5px rgba(var(--primary-rgb), 0.3);
+        }
+        .help-button:hover {
+            box-shadow: 0 15px 30px -8px rgba(var(--primary-rgb), 0.4);
+        }
+        @keyframes pulse-help {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        /* Add pulsing animation for new users */
+        body.new-user .help-button {
+            animation: pulse-help 2s infinite;
+        }
+    </style>
+
+    <script>
+        // Add this to highlight the help button for new users
+        // You can remove this animation after the user has viewed the help page
+        document.addEventListener('DOMContentLoaded', function() {
+            // Check if user is new (you can set this based on a session or cookie)
+            const isNewUser = localStorage.getItem('visited_help') !== 'true';
+            if (isNewUser) {
+                document.body.classList.add('new-user');
+            }
+            
+            // Remove "new user" marking when they visit help
+            const helpButton = document.querySelector('.help-button');
+            if (helpButton) {
+                helpButton.addEventListener('click', function() {
+                    localStorage.setItem('visited_help', 'true');
+                    document.body.classList.remove('new-user');
+                });
+            }
+        });
+    </script>
 
     <!-- Alpine.js -->
     <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>

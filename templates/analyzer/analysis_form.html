@@ -14,12 +14,21 @@
                                text-transparent bg-clip-text">Analyze Food</h1>
                     <p class="mt-2 text-gray-600">Get instant AI-powered nutritional insights</p>
                 </div>
+
+                <!-- Add this near the top of the form -->
+                <div class="flex justify-between items-center mb-6"> 
+                    <a href="{% url 'help' %}#analyzing-food" class="text-primary hover:text-primary/80 flex items-center gap-1">
+                        <span>Need help?</span>
+                        <i class="fas fa-question-circle"></i>
+                    </a>
+                </div>
                 <a href="{% url 'home' %}" 
                    class="group flex items-center justify-center w-10 h-10 rounded-full 
                           bg-gray-50 text-gray-500 hover:bg-red-50 hover:text-red-500 
                           transition-all duration-200">
                     <i class="fas fa-times group-hover:rotate-90 transition-transform"></i>
                 </a>
+
             </div>
 
             <form method="post" enctype="multipart/form-data" id="analysis-form" class="space-y-8">

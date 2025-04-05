@@ -223,7 +223,11 @@ class CustomLogoutView(LogoutView):
         response = super().dispatch(request, *args, **kwargs)
         messages.success(request, "You have been successfully logged out.")
         return response
-# ...existing imports...
+
+def help_page(request):
+    """Render the help page with instructions on using FoodAI."""
+    return render(request, 'analyzer/help.html')
+
 from django.http import JsonResponse
 from django.core.exceptions import PermissionDenied
 
