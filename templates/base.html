@@ -100,10 +100,7 @@
                         {% include 'components/navbar_link.html' with text='explore' url='explore' icon='fas fa-search' %}
                         {% include 'components/navbar_link.html' with text='recommendations' url='recommend' icon='fas fa-utensils' %}
                         {% include 'components/navbar_link.html' with text='about' url='about' icon='fas fa-info-circle' %}
-                        <a href="{% url 'help' %}" class="nav-link group flex items-center px-3 py-2 text-sm font-medium rounded-md">
-                            <i class="fas fa-question-circle mr-3 text-gray-400 group-hover:text-gray-500"></i>
-                            <span>Help</span>
-                        </a>
+                         {% include 'components/navbar_link.html' with text='help' url='help' icon='fas fa-question-circle' %}
                     </div>
                 </div>
 

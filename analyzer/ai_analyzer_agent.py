@@ -18,7 +18,7 @@ class FoodAnalyzer:
     def _extract_json_parts(self, text: str) -> tuple:
         """Extract JSON parts from text using regex"""
         try:
-            # Remove markdown code blocks and get clean JSON strings
+            #  emove markdown code blocks and get clean JSON strings
             json_blocks = re.findall(r'```json\s*(.*?)\s*```', text, re.DOTALL)
             if len(json_blocks) != 3:
                 raise ValueError(f"Expected 3 JSON blocks, got {len(json_blocks)}")
@@ -30,9 +30,7 @@ class FoodAnalyzer:
             
             return ingredients, calories, nutrients
                 
-        except Exception as e:
-            print(f"Raw response: {text}")  # Debug output
-            print(f"JSON blocks: {json_blocks if 'json_blocks' in locals() else 'None'}")  # Debug parts
+        except Exception as e: 
             raise ValueError(f"Failed to parse response: {str(e)}")
 
     def validate_image(self, image_path: str) -> bool:
