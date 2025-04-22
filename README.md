@@ -7,24 +7,28 @@ FoodAI is a modern web platform that leverages artificial intelligence to analyz
 ## ✨ Features
 
 ### 🍽️ Food Analysis
+
 - **Image Recognition**: Upload photos of your meals and let AI identify the food
 - **Nutritional Breakdown**: Get detailed calorie counts and nutritional information
 - **Ingredient Detection**: Automatically identify ingredients in your food
 - **Analysis History**: Track your eating patterns over time
 
 ### 🧠 Smart Recommendations
+
 - **Personalized Suggestions**: Receive meal recommendations based on your preferences
 - **Dietary Accommodation**: Support for various dietary needs (vegetarian, vegan, gluten-free, etc.)
 - **Cultural Preferences**: Filter recommendations by regional cuisine
 - **Family-Sized Options**: Scale recipes for different group sizes
 
 ### 👥 Community Features
+
 - **Public/Private Sharing**: Choose whether to share your food analyses
 - **Like & Comment**: Interact with other users' food posts
 - **User Profiles**: Customize your profile with a photo and bio
 - **Explore Feed**: Discover popular food analyses from the community
 
 ### 🛠️ Additional Tools
+
 - **Comprehensive Help Section**: Interactive guides with animations
 - **User Authentication**: Secure signup and login process
 - **Mobile-Responsive Design**: Optimized for all device sizes
@@ -33,6 +37,7 @@ FoodAI is a modern web platform that leverages artificial intelligence to analyz
 ## 🚀 Getting Started
 
 ### Prerequisites
+
 - Python 3.8+
 - pip
 - virtualenv (recommended)
@@ -40,39 +45,46 @@ FoodAI is a modern web platform that leverages artificial intelligence to analyz
 ### Installation
 
 1. Clone the repository:
+
    ```
    git clone https://github.com/yourusername/foodai.git
    cd foodai
    ```
 
 2. Create and activate a virtual environment:
+
    ```
    python -m venv env
    source env/bin/activate  # On Windows: env\Scripts\activate
    ```
 
 3. Install dependencies:
+
    ```
    pip install -r requirements.txt
    ```
 
 4. Set up environment variables:
+
    ```
    cp .env.example .env
    # Edit .env file with your configuration
    ```
 
 5. Run migrations:
+
    ```
    python manage.py migrate
    ```
 
 6. Create a superuser:
+
    ```
    python manage.py createsuperuser
    ```
 
 7. Start the development server:
+
    ```
    python manage.py runserver
    ```
@@ -95,23 +107,6 @@ FoodAI is a modern web platform that leverages artificial intelligence to analyz
 - **AI**: Custom machine learning models for food recognition
 - **Database**: PostgreSQL
 - **Deployment**: Docker, Nginx
-
-## 📋 Project Structure
-
-```
-foodai/
-├── analyzer/              # Main Django app for food analysis
-├── authentication/        # User authentication system
-├── recommendations/       # Recommendation engine
-├── static/                # Static files (CSS, JS, images)
-├── templates/             # HTML templates
-│   ├── analyzer/          # Analysis-related templates
-│   ├── authentication/    # Login/signup templates
-│   └── components/        # Reusable components
-├── media/                 # User-uploaded content
-├── foodai/                # Project settings
-└── manage.py              # Django management script
-```
 
 ## 🤝 Contributing
 
