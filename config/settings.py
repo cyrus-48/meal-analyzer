@@ -24,7 +24,16 @@ INSTALLED_APPS = [
     'recommendations.apps.RecommendationsConfig',
     'whitenoise.runserver_nostatic',
 ]
+MIDDLEWARE_CLASSES = [
 
+    'whitenoise.middleware.WhiteNoiseMiddleware',
+    'django.middleware.common.CommonMiddleware',
+    'django.middleware.csrf.CsrfViewMiddleware',
+    'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'django.contrib.messages.middleware.MessageMiddleware',
+    'django.middleware.clickjacking.XFrameOptionsMiddleware',
+]
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
@@ -109,9 +118,6 @@ MEDIA_ROOT = BASE_DIR / 'media'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # OpenRouter API Key
-OPENROUTER_API_KEY = os.getenv('OPENROUTER_API_KEY')
-AI_BASE_URL = os.getenv('AI_BASE_URL', 'https://api.openrouter.ai/v1/chat/completions')
-HF_API_KEY =  str(os.getenv('HF_API_KEY'))
 GEMINI_API_KEY = str(os.getenv('GEMINI_API_KEY'))
 
 # Authentication settings
