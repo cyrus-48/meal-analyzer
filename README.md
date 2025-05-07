@@ -107,7 +107,7 @@ FoodAI is a modern web platform that leverages artificial intelligence to analyz
 
 - **Frontend**: HTML5, CSS3, TailwindCSS, Alpine.js
 - **Backend**: Django, Python
-- **AI**: genai
+- **AI**: google-genai  - for image analysis and content  generation
 - **Database**: PostgreSQL 
 
  
