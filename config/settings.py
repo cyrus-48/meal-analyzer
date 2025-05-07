@@ -11,7 +11,7 @@ SECRET_KEY = os.getenv('SECRET_KEY', 'django-insecure-' + os.urandom(32).hex())
 
 DEBUG = os.getenv('DEBUG', 'True').lower() == 'true'
 
-ALLOWED_HOSTS =  ["*" , "https://food-ai-rd0w.onrender.com/"]
+ALLOWED_HOSTS =  ["*"]
 INSTALLED_APPS = [
     'simpleui',
     'django.contrib.admin',
