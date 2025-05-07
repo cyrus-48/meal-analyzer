@@ -1,1 +1,0 @@
-# This directory contains sample food images for testing purposes

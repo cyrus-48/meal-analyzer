@@ -126,7 +126,7 @@ LOGIN_REDIRECT_URL = 'home'
 LOGOUT_REDIRECT_URL = 'home'
  
 EMAIL_HOST = os.getenv('EMAIL_HOST')
-EMAIL_PORT = int(os.getenv('EMAIL_PORT')) 
+EMAIL_PORT = os.getenv('EMAIL_PORT')
 EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD') 
 
@@ -145,7 +145,7 @@ MESSAGE_TAGS = {
     messages.INFO: 'bg-blue-100 text-blue-800',
     messages.SUCCESS: 'bg-green-100 text-green-800',
     messages.WARNING: 'bg-yellow-100 text-yellow-800',
-    messages.ERROR: 'bg-red-100 text-red-800',
+    messages.ERROR: 'bg-red-100 text-re:d-800',
 }
 
 # Security settings
@@ -156,6 +156,6 @@ if not DEBUG:
     SECURE_BROWSER_XSS_FILTER = True
     SECURE_CONTENT_TYPE_NOSNIFF = True
     X_FRAME_OPTIONS = 'DENY'
-    SECURE_HSTS_SECONDS = 31536000  # 1 year
+    SECURE_HSTS_SECONDS = 31536000  
     SECURE_HSTS_INCLUDE_SUBDOMAINS = True
     SECURE_HSTS_PRELOAD = True

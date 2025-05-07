@@ -1,6 +1,5 @@
 # FoodAI - AI-Powered Food Analysis Platform
-
-![FoodAI Logo](path/to/logo.png)
+ 
 
 FoodAI is a modern web platform that leverages artificial intelligence to analyze food images, providing detailed nutritional information, ingredient detection, and personalized meal recommendations.
 
@@ -26,13 +25,6 @@ FoodAI is a modern web platform that leverages artificial intelligence to analyz
 - **Like & Comment**: Interact with other users' food posts
 - **User Profiles**: Customize your profile with a photo and bio
 - **Explore Feed**: Discover popular food analyses from the community
-
-### 🛠️ Additional Tools
-
-- **Comprehensive Help Section**: Interactive guides with animations
-- **User Authentication**: Secure signup and login process
-- **Mobile-Responsive Design**: Optimized for all device sizes
-- **Modern UI**: Clean, intuitive interface with smooth interactions
 
 ## 🚀 Getting Started
 
@@ -94,37 +86,31 @@ FoodAI is a modern web platform that leverages artificial intelligence to analyz
 ## 📱 Screenshots
 
 <div style="display: flex; flex-wrap: wrap; gap: 10px; justify-content: center;">
-  <img src="path/to/screenshot1.png" width="400" alt="Home Page">
-  <img src="path/to/screenshot2.png" width="400" alt="Food Analysis">
-  <img src="path/to/screenshot3.png" width="400" alt="Recommendations">
-  <img src="path/to/screenshot4.png" width="400" alt="Profile Page">
+    <img src="screenshots/landingpage.png" width="400" alt="Landing Page">
+    <!-- Home Page -->
+    <img src="screenshots/home.png" width="400" alt="Home Page">
+    <!-- Analysis Page -->
+    <img src="screenshots/analyze.png" width="400" alt="Food Analysis">
+    <!-- Analysis Detail -->
+    <img src="screenshots/detail.png" width="400" alt="Analysis Detail">
+    <!-- Recommendations -->
+    <img src="screenshots/recommentation.png" width="400" alt="Recommendations">
+    <!-- Explore Page -->
+    <img src="screenshots/explore.png" width="400" alt="Explore">
+    <!-- Profile Page -->
+    <img src="screenshots/profile.png" width="400" alt="Profile">
+    <!-- Login Page -->
+    <img src="screenshots/login.png" width="400" alt="Login">
 </div>
 
 ## 🧪 Technologies Used
 
 - **Frontend**: HTML5, CSS3, TailwindCSS, Alpine.js
 - **Backend**: Django, Python
-- **AI**: Custom machine learning models for food recognition
-- **Database**: PostgreSQL
-- **Deployment**: Docker, Nginx
+- **AI**: genai
+- **Database**: PostgreSQL 
 
-## 🤝 Contributing
-
-Contributions are welcome! Please feel free to submit a Pull Request.
-
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add some amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
-
+ 
 ## 📄 License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## 👏 Acknowledgments
-
-- [Django](https://www.djangoproject.com/) - The web framework used
-- [TailwindCSS](https://tailwindcss.com/) - For the modern UI design
-- [Alpine.js](https://alpinejs.dev/) - For interactive UI components
-- [FontAwesome](https://fontawesome.com/) - For icons
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details. 
